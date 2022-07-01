@@ -3,6 +3,7 @@ title: "Post: Standard"
 excerpt_separator: "<!--more-->"
 categories:
   - Blog
+  - Computer Graphics
 tags:
   - Post Formats
   - readability
