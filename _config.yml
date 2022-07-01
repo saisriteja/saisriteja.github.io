@@ -92,29 +92,66 @@ footer:
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/"
 
+# default YAML front matter
 defaults:
-  # _posts
+  # all
   - scope:
       path: ""
-      type: posts
     values:
       layout: single
+      mathjax: true
       author_profile: true
-      read_time: true
+      class: wide
+      title: " "
+      title_separator: "|"
+  # posts
+  - scope:
+      type: posts
+    values:
+      toc: true
+      toc_label: "Contents"
+      read_time: false
       comments: true
-      share: true
-      related: true
   # _pages
   - scope:
       path: "_pages"
-      type: pages
+      type: portfolio
     values:
-      layout: single
-      author_profile: true
+      author_profile: false
+      excerpt: ""
+      sidebar:
+        nav: "portfolio"
 
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
+# collections
+collections:
+  portfolio:
+    output: true
+
+
+
+# defaults:
+#   # _posts
+#   - scope:
+#       path: ""
+#       type: posts
+#     values:
+#       layout: single
+#       author_profile: true
+#       read_time: true
+#       comments: true
+#       share: true
+#       related: true
+#   # _pages
+#   - scope:
+#       path: "_pages"
+#       type: pages
+#     values:
+#       layout: single
+#       author_profile: true
+
+# category_archive:
+#   type: liquid
+#   path: /categories/
+# tag_archive:
+#   type: liquid
+#   path: /tags/
