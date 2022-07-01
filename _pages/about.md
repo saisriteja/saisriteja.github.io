@@ -3,6 +3,12 @@ permalink: /about/
 title: "About"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+# Info
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+A highly-motivated engineering undergraduate who is seeking to excel and want to grow in a challenging world along with your organization using innovative thinking, adaptability skills, and facing challenges to raise the standards of me and the organization in the sphere of business and management.
+
+Despite being an Undergrad student in Electronics and Communication, I have completed, courses in Deep Learning, Machine Learning by hands-on practice approach, and data analysis that has provided me with a firm understanding of rising market strategies and technologies.
+
+# Education
+
+Bachelors in Electronic and Communication Engineering @SASTRA Univeristy(2021 Batch)
