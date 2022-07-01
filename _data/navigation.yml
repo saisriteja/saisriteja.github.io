@@ -2,5 +2,5 @@ main:
   - title: "About"
     url: /about/
   - title: "Blog"
-    url: /categories/
+    url: /posts/
 
