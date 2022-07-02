@@ -18,8 +18,11 @@ email: kuppasaisritej@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Hey there, this is Teja, I am CV - DL engineer in Detect Technologies(IIT Madras Research Park). My intresets include
   Computer Vision, Computer Graphics and Deep Learning.
-twitter_username: username
+twitter_username: @KuppaSaisriteja
 github_username: saisriteja
+
+
+
 minimal_mistakes_skin: dirt
 search: true
 
@@ -72,25 +75,25 @@ author:
       url: "https://"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://twitter.com/KuppaSaisriteja"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/saisriteja"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/saisriteza/"
 
 footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://twitter.com/KuppaSaisriteja"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/saisriteja"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/saisriteza/"
 
 # default YAML front matter
 defaults:
