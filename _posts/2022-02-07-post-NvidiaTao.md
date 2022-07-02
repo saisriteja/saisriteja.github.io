@@ -164,7 +164,7 @@ eval_config {
 ## Cmd for training the base model
 
 ```python
-tao classification train -e /home/saiteja/DetectTechWork/spec.cfg -r /home/saiteja/DetectTechWork -k 7221
+tao classification train -e /home/saiteja/DetectTechWork/spec.cfg -r /home/saiteja/DetectTechWork -k 7226
 ```
 
 
@@ -930,4 +930,346 @@ Using TensorFlow backend.
 
 
 
+# spec config 
+```python
+model_config {
+  # Model Architecture can be chosen from:
+  # ['resnet', 'vgg', 'googlenet', 'alexnet']
+  arch: "resnet"
+  # for resnet --> n_layers can be [10, 18, 50]
+  # for vgg --> n_layers can be [16, 19]
+  n_layers: 18
+  use_batch_norm: True
+  use_bias: False
+  all_projections: False
+  use_pooling: True
+  resize_interpolation_method: BICUBIC
+  # if you want to use the pretrained model,
+  # image size should be "3,224,224"
+  # otherwise, it can be "3, X, Y", where X,Y >= 16
+  input_image_size: "3,224,224"
+}
+train_config {
+  train_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/train"
+  val_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/val"
+  # use when model is already trained and pruned
+  pretrained_model_path: "/home/saiteja/DetectTechWork/weights/resnet_010.tlt"
+  # Only ['sgd', 'adam'] are supported for optimizer
+  optimizer {
+      sgd {
+      lr: 0.01
+      decay: 0.0
+      momentum: 0.9
+      nesterov: False
+      }
+  }
+  batch_size_per_gpu: 24
+  n_epochs: 10
+  # Number of CPU cores for loading data
+  n_workers: 4
+  # regularizer
+  reg_config {
+      # regularizer type can be "L1", "L2" or "None".
+      # use while training the model
+      #type: "L2"
+      # use while training the pruned model
+      type: "None" 
+      # if the type is not "None",
+      # scope can be either "Conv2D" or "Dense" or both.
+      scope: "Conv2D,Dense"
+      # 0 < weight decay < 1
+      weight_decay: 0.000015
+  }
+  # learning_rate
+  lr_config {
+      cosine {
+      learning_rate: 0.04
+      soft_start: 0.0
+      }
+  }
+  enable_random_crop: True
+  enable_center_crop: True
+  enable_color_augmentation: True
+  mixup_alpha: 0.2
+  label_smoothing: 0.1
+  preprocess_mode: "caffe"
+  image_mean {
+    key: 'b'
+    value: 103.9
+  }
+  image_mean {
+    key: 'g'
+    value: 116.8
+  }
+  image_mean {
+    key: 'r'
+    value: 123.7
+  }
+}
+eval_config {
+  eval_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/test"
+  model_path: "/home/saiteja/DetectTechWork/weights/resnet_010.tlt"
+  top_k: 3
+  batch_size: 256
+  n_workers: 4
+  enable_center_crop: True
+}
+```
 
+# Log Output after training
+```python
+File "../root/.cache/bazel/_bazel_root/ed34e6d125608f91724fda23656f1726/execroot/ai_infra/bazel-out/k8-fastbuild/bin/magnet/packages/iva/build_wheel.runfiles/ai_infra/iva/makenet/utils/helper.py", line 174:
+<source missing, REPL/exec in use?>
+
+  state.func_ir.loc))
+/usr/local/lib/python3.6/dist-packages/numba/object_mode_passes.py:188: NumbaDeprecationWarning:
+Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.
+
+For more information visit http://numba.pydata.org/numba-doc/latest/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit
+
+File "../root/.cache/bazel/_bazel_root/ed34e6d125608f91724fda23656f1726/execroot/ai_infra/bazel-out/k8-fastbuild/bin/magnet/packages/iva/build_wheel.runfiles/ai_infra/iva/makenet/utils/helper.py", line 174:
+<source missing, REPL/exec in use?>
+
+  state.func_ir.loc))
+WARNING:tensorflow:From /root/.cache/bazel/_bazel_root/ed34e6d125608f91724fda23656f1726/execroot/ai_infra/bazel-out/k8-fastbuild/bin/magnet/packages/iva/build_wheel.runfiles/ai_infra/iva/common/utils.py:186: The name tf.Summary is deprecated. Please use tf.compat.v1.Summary instead.
+
+2022-07-02 13:08:22,734 [WARNING] tensorflow: From /root/.cache/bazel/_bazel_root/ed34e6d125608f91724fda23656f1726/execroot/ai_infra/bazel-out/k8-fastbuild/bin/magnet/packages/iva/build_wheel.runfiles/ai_infra/iva/common/utils.py:186: The name tf.Summary is deprecated. Please use tf.compat.v1.Summary instead.
+
+
+ 2/25 [=>............................] - ETA: 1:19 - loss: 0.7199 - acc: 0.5417
+ 4/25 [===>..........................] - ETA: 36s - loss: 0.8058 - acc: 0.5208
+ 6/25 [======>.......................] - ETA: 22s - loss: 0.8863 - acc: 0.5625
+ 8/25 [========>.....................] - ETA: 15s - loss: 0.7938 - acc: 0.6094
+10/25 [===========>..................] - ETA: 10s - loss: 0.7801 - acc: 0.6208
+12/25 [=============>................] - ETA: 7s - loss: 0.7606 - acc: 0.6354
+13/25 [==============>...............] - ETA: 6s - loss: 0.7431 - acc: 0.6410
+15/25 [=================>............] - ETA: 4s - loss: 0.7471 - acc: 0.6528
+16/25 [==================>...........] - ETA: 4s - loss: 0.7431 - acc: 0.6563
+17/25 [===================>..........] - ETA: 3s - loss: 0.7402 - acc: 0.6520
+18/25 [====================>.........] - ETA: 3s - loss: 0.7337 - acc: 0.6458
+20/25 [=======================>......] - ETA: 2s - loss: 0.7322 - acc: 0.6479
+21/25 [========================>.....] - ETA: 1s - loss: 0.7371 - acc: 0.6448
+23/25 [==========================>...] - ETA: 0s - loss: 0.7220 - acc: 0.6504
+25/25 [==============================] - 10s 382ms/step - loss: 0.7219 - acc: 0.6350 - val_loss: 4.1880 - val_acc: 0.6144
+7488b160a67e:136:191 [0] NCCL INFO Bootstrap : Using eth0:172.17.0.2<0>
+7488b160a67e:136:191 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+7488b160a67e:136:191 [0] NCCL INFO P2P plugin IBext
+7488b160a67e:136:191 [0] NCCL INFO NET/IB : No device found.
+7488b160a67e:136:191 [0] NCCL INFO NET/IB : No device found.
+7488b160a67e:136:191 [0] NCCL INFO NET/Socket : Using [0]eth0:172.17.0.2<0>
+7488b160a67e:136:191 [0] NCCL INFO Using network Socket
+NCCL version 2.11.4+cuda11.6
+7488b160a67e:136:191 [0] NCCL INFO Channel 00/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 01/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 02/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 03/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 04/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 05/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 06/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 07/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 08/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 09/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 10/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 11/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 12/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 13/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 14/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 15/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 16/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 17/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 18/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 19/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 20/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 21/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 22/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 23/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 24/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 25/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 26/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 27/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 28/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 29/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 30/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Channel 31/32 :    0
+7488b160a67e:136:191 [0] NCCL INFO Trees [0] -1/-1/-1->0->-1 [1] -1/-1/-1->0->-1 [2] -1/-1/-1->0->-1 [3] -1/-1/-1->0->-1 [4] -1/-1/-1->0->-1 [5] -1/-1/-1->0->-1 [6] -1/-1/-1->0->-1 [7] -1/-1/-1->0->-1 [8] -1/-1/-1->0->-1 [9] -1/-1/-1->0->-1 [10] -1/-1/-1->0->-1 [11] -1/-1/-1->0->-1 [12] -1/-1/-1->0->-1 [13] -1/-1/-1->0->-1 [14] -1/-1/-1->0->-1 [15] -1/-1/-1->0->-1 [16] -1/-1/-1->0->-1 [17] -1/-1/-1->0->-1 [18] -1/-1/-1->0->-1 [19] -1/-1/-1->0->-1 [20] -1/-1/-1->0->-1 [21] -1/-1/-1->0->-1 [22] -1/-1/-1->0->-1 [23] -1/-1/-1->0->-1 [24] -1/-1/-1->0->-1 [25] -1/-1/-1->0->-1 [26] -1/-1/-1->0->-1 [27] -1/-1/-1->0->-1 [28] -1/-1/-1->0->-1 [29] -1/-1/-1->0->-1 [30] -1/-1/-1->0->-1 [31] -1/-1/-1->0->-1
+7488b160a67e:136:191 [0] NCCL INFO Connected all rings
+7488b160a67e:136:191 [0] NCCL INFO Connected all trees
+7488b160a67e:136:191 [0] NCCL INFO 32 coll channels, 32 p2p channels, 32 p2p channels per peer
+7488b160a67e:136:191 [0] NCCL INFO comm 0x7fa3007d2980 rank 0 nranks 1 cudaDev 0 busId 6000 - Init COMPLETE
+/usr/local/lib/python3.6/dist-packages/keras/callbacks.py:122: UserWarning: Method on_batch_end() is slow compared to the batch update (0.474650). Check your callbacks.
+  % delta_t_median)
+2022-07-02 17:56:35,138 [INFO] root: Training loop in progress
+Epoch 2/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.4778 - acc: 0.8333
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.5248 - acc: 0.7361
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.5895 - acc: 0.7083
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.6060 - acc: 0.6964
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.6123 - acc: 0.6806
+11/25 [============>.................] - ETA: 0s - loss: 0.7183 - acc: 0.6629
+12/25 [=============>................] - ETA: 0s - loss: 0.7106 - acc: 0.6632
+14/25 [===============>..............] - ETA: 0s - loss: 0.6929 - acc: 0.6696
+16/25 [==================>...........] - ETA: 0s - loss: 0.6865 - acc: 0.6641
+17/25 [===================>..........] - ETA: 0s - loss: 0.6816 - acc: 0.6716
+19/25 [=====================>........] - ETA: 0s - loss: 0.6928 - acc: 0.6711
+20/25 [=======================>......] - ETA: 0s - loss: 0.7053 - acc: 0.6687
+21/25 [========================>.....] - ETA: 0s - loss: 0.6921 - acc: 0.6746
+22/25 [=========================>....] - ETA: 0s - loss: 0.7055 - acc: 0.6742
+24/25 [===========================>..] - ETA: 0s - loss: 0.6897 - acc: 0.6823
+25/25 [==============================] - 2s 85ms/step - loss: 0.6803 - acc: 0.6883 - val_loss: 0.7682 - val_acc: 0.7484
+2022-07-02 17:56:40,205 [INFO] root: Training loop in progress
+Epoch 3/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.8908 - acc: 0.5417
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.6993 - acc: 0.7083
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.6857 - acc: 0.6917
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.6938 - acc: 0.6190
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.7191 - acc: 0.5787
+11/25 [============>.................] - ETA: 0s - loss: 0.6818 - acc: 0.6098
+13/25 [==============>...............] - ETA: 0s - loss: 0.7013 - acc: 0.6186
+15/25 [=================>............] - ETA: 0s - loss: 0.7077 - acc: 0.6083
+16/25 [==================>...........] - ETA: 0s - loss: 0.7050 - acc: 0.6146
+17/25 [===================>..........] - ETA: 0s - loss: 0.7046 - acc: 0.6103
+18/25 [====================>.........] - ETA: 0s - loss: 0.6950 - acc: 0.6181
+19/25 [=====================>........] - ETA: 0s - loss: 0.6930 - acc: 0.6294
+21/25 [========================>.....] - ETA: 0s - loss: 0.6792 - acc: 0.6409
+23/25 [==========================>...] - ETA: 0s - loss: 0.6824 - acc: 0.6413
+24/25 [===========================>..] - ETA: 0s - loss: 0.6757 - acc: 0.6441
+25/25 [==============================] - 2s 85ms/step - loss: 0.6662 - acc: 0.6517 - val_loss: 0.4993 - val_acc: 0.7843
+2022-07-02 17:56:44,908 [INFO] root: Training loop in progress
+Epoch 4/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.5037 - acc: 0.7917
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.5149 - acc: 0.7639
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.5596 - acc: 0.7250
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.5426 - acc: 0.7500
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.5475 - acc: 0.7546
+11/25 [============>.................] - ETA: 0s - loss: 0.5508 - acc: 0.7424
+13/25 [==============>...............] - ETA: 0s - loss: 0.5408 - acc: 0.7628
+15/25 [=================>............] - ETA: 0s - loss: 0.5440 - acc: 0.7583
+16/25 [==================>...........] - ETA: 0s - loss: 0.5353 - acc: 0.7656
+17/25 [===================>..........] - ETA: 0s - loss: 0.5345 - acc: 0.7672
+19/25 [=====================>........] - ETA: 0s - loss: 0.5294 - acc: 0.7675
+21/25 [========================>.....] - ETA: 0s - loss: 0.5356 - acc: 0.7718
+22/25 [=========================>....] - ETA: 0s - loss: 0.5347 - acc: 0.7746
+24/25 [===========================>..] - ETA: 0s - loss: 0.5278 - acc: 0.7778
+25/25 [==============================] - 2s 78ms/step - loss: 0.5265 - acc: 0.7750 - val_loss: 0.5764 - val_acc: 0.7647
+2022-07-02 17:56:49,748 [INFO] root: Training loop in progress
+Epoch 5/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.6339 - acc: 0.7500
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.5935 - acc: 0.7361
+ 4/25 [===>..........................] - ETA: 0s - loss: 0.5784 - acc: 0.7396
+ 6/25 [======>.......................] - ETA: 0s - loss: 0.5397 - acc: 0.7639
+ 8/25 [========>.....................] - ETA: 0s - loss: 0.5108 - acc: 0.7813
+10/25 [===========>..................] - ETA: 0s - loss: 0.5318 - acc: 0.7625
+12/25 [=============>................] - ETA: 0s - loss: 0.5164 - acc: 0.7743
+13/25 [==============>...............] - ETA: 0s - loss: 0.5045 - acc: 0.7853
+15/25 [=================>............] - ETA: 0s - loss: 0.5172 - acc: 0.7722
+16/25 [==================>...........] - ETA: 0s - loss: 0.5227 - acc: 0.7656
+17/25 [===================>..........] - ETA: 0s - loss: 0.5154 - acc: 0.7721
+19/25 [=====================>........] - ETA: 0s - loss: 0.5207 - acc: 0.7654
+21/25 [========================>.....] - ETA: 0s - loss: 0.5233 - acc: 0.7659
+22/25 [=========================>....] - ETA: 0s - loss: 0.5251 - acc: 0.7708
+24/25 [===========================>..] - ETA: 0s - loss: 0.5189 - acc: 0.7674
+25/25 [==============================] - 2s 83ms/step - loss: 0.5164 - acc: 0.7667 - val_loss: 0.3671 - val_acc: 0.8431
+2022-07-02 17:56:54,692 [INFO] root: Training loop in progress
+Epoch 6/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.7898 - acc: 0.6667
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.6189 - acc: 0.7361
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.5966 - acc: 0.7333
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.5589 - acc: 0.7619
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.5509 - acc: 0.7731
+11/25 [============>.................] - ETA: 0s - loss: 0.5490 - acc: 0.7727
+13/25 [==============>...............] - ETA: 0s - loss: 0.5472 - acc: 0.7660
+15/25 [=================>............] - ETA: 0s - loss: 0.5331 - acc: 0.7667
+17/25 [===================>..........] - ETA: 0s - loss: 0.5350 - acc: 0.7721
+18/25 [====================>.........] - ETA: 0s - loss: 0.5307 - acc: 0.7755
+20/25 [=======================>......] - ETA: 0s - loss: 0.5234 - acc: 0.7771
+22/25 [=========================>....] - ETA: 0s - loss: 0.5267 - acc: 0.7727
+23/25 [==========================>...] - ETA: 0s - loss: 0.5215 - acc: 0.7754
+25/25 [==============================] - 2s 84ms/step - loss: 0.5187 - acc: 0.7800 - val_loss: 0.4044 - val_acc: 0.8529
+2022-07-02 17:56:59,653 [INFO] root: Training loop in progress
+Epoch 7/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.4677 - acc: 0.8333
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.5338 - acc: 0.7639
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.5104 - acc: 0.7917
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.4924 - acc: 0.7917
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.4747 - acc: 0.8148
+11/25 [============>.................] - ETA: 0s - loss: 0.5036 - acc: 0.7992
+13/25 [==============>...............] - ETA: 0s - loss: 0.4954 - acc: 0.8013
+15/25 [=================>............] - ETA: 0s - loss: 0.4800 - acc: 0.8111
+16/25 [==================>...........] - ETA: 0s - loss: 0.4875 - acc: 0.8073
+17/25 [===================>..........] - ETA: 0s - loss: 0.4970 - acc: 0.7966
+18/25 [====================>.........] - ETA: 0s - loss: 0.4931 - acc: 0.8032
+20/25 [=======================>......] - ETA: 0s - loss: 0.4974 - acc: 0.8042
+22/25 [=========================>....] - ETA: 0s - loss: 0.5013 - acc: 0.8087
+24/25 [===========================>..] - ETA: 0s - loss: 0.4949 - acc: 0.8090
+25/25 [==============================] - 2s 80ms/step - loss: 0.4959 - acc: 0.8083 - val_loss: 0.3404 - val_acc: 0.8758
+2022-07-02 17:57:04,913 [INFO] root: Training loop in progress
+Epoch 8/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.4191 - acc: 0.9167
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.4646 - acc: 0.8472
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.4758 - acc: 0.8417
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.4589 - acc: 0.8452
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.4785 - acc: 0.8287
+11/25 [============>.................] - ETA: 0s - loss: 0.4743 - acc: 0.8258
+13/25 [==============>...............] - ETA: 0s - loss: 0.4746 - acc: 0.8269
+15/25 [=================>............] - ETA: 0s - loss: 0.4749 - acc: 0.8167
+16/25 [==================>...........] - ETA: 0s - loss: 0.4662 - acc: 0.8203
+17/25 [===================>..........] - ETA: 0s - loss: 0.4705 - acc: 0.8186
+19/25 [=====================>........] - ETA: 0s - loss: 0.4699 - acc: 0.8180
+20/25 [=======================>......] - ETA: 0s - loss: 0.4774 - acc: 0.8188
+22/25 [=========================>....] - ETA: 0s - loss: 0.4700 - acc: 0.8220
+24/25 [===========================>..] - ETA: 0s - loss: 0.4645 - acc: 0.8247
+25/25 [==============================] - 2s 84ms/step - loss: 0.4626 - acc: 0.8267 - val_loss: 0.3288 - val_acc: 0.8529
+2022-07-02 17:57:09,736 [INFO] root: Training loop in progress
+Epoch 9/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.6327 - acc: 0.7500
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.4395 - acc: 0.8472
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.4341 - acc: 0.8250
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.4726 - acc: 0.8095
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.4540 - acc: 0.8148
+11/25 [============>.................] - ETA: 0s - loss: 0.4577 - acc: 0.8182
+13/25 [==============>...............] - ETA: 0s - loss: 0.4554 - acc: 0.8205
+15/25 [=================>............] - ETA: 0s - loss: 0.4569 - acc: 0.8111
+16/25 [==================>...........] - ETA: 0s - loss: 0.4498 - acc: 0.8177
+18/25 [====================>.........] - ETA: 0s - loss: 0.4494 - acc: 0.8171
+19/25 [=====================>........] - ETA: 0s - loss: 0.4554 - acc: 0.8136
+20/25 [=======================>......] - ETA: 0s - loss: 0.4525 - acc: 0.8146
+21/25 [========================>.....] - ETA: 0s - loss: 0.4512 - acc: 0.8115
+22/25 [=========================>....] - ETA: 0s - loss: 0.4486 - acc: 0.8125
+23/25 [==========================>...] - ETA: 0s - loss: 0.4533 - acc: 0.8116
+24/25 [===========================>..] - ETA: 0s - loss: 0.4465 - acc: 0.8160
+25/25 [==============================] - 2s 78ms/step - loss: 0.4485 - acc: 0.8117 - val_loss: 0.3041 - val_acc: 0.8791
+2022-07-02 17:57:14,428 [INFO] root: Training loop in progress
+Epoch 10/10
+
+ 1/25 [>.............................] - ETA: 0s - loss: 0.3625 - acc: 0.9167
+ 3/25 [==>...........................] - ETA: 0s - loss: 0.4010 - acc: 0.8889
+ 5/25 [=====>........................] - ETA: 0s - loss: 0.4021 - acc: 0.8500
+ 7/25 [=======>......................] - ETA: 0s - loss: 0.4158 - acc: 0.8512
+ 9/25 [=========>....................] - ETA: 0s - loss: 0.4041 - acc: 0.8565
+11/25 [============>.................] - ETA: 0s - loss: 0.4283 - acc: 0.8371
+13/25 [==============>...............] - ETA: 0s - loss: 0.4320 - acc: 0.8365
+15/25 [=================>............] - ETA: 0s - loss: 0.4272 - acc: 0.8389
+16/25 [==================>...........] - ETA: 0s - loss: 0.4306 - acc: 0.8385
+17/25 [===================>..........] - ETA: 0s - loss: 0.4418 - acc: 0.8333
+19/25 [=====================>........] - ETA: 0s - loss: 0.4348 - acc: 0.8333
+20/25 [=======================>......] - ETA: 0s - loss: 0.4332 - acc: 0.8354
+22/25 [=========================>....] - ETA: 0s - loss: 0.4464 - acc: 0.8239
+24/25 [===========================>..] - ETA: 0s - loss: 0.4373 - acc: 0.8281
+25/25 [==============================] - 2s 85ms/step - loss: 0.4373 - acc: 0.8267 - val_loss: 0.3140 - val_acc: 0.8693
+2022-07-02 17:57:19,043 [INFO] root: Training loop in progress
+2022-07-02 17:57:19,052 [INFO] root: Training loop complete.
+2022-07-02 17:57:19,053 [INFO] root: Final model evaluation in progress.
+2022-07-02 17:57:20,888 [INFO] root: Model evaluation in complete.
+2022-07-02 17:57:20,889 [INFO] __main__: Total Val Loss: 0.31395021080970764
+2022-07-02 17:57:20,889 [INFO] __main__: Total Val accuracy: 0.8692810535430908
+2022-07-02 17:57:20,889 [INFO] root: Training finished successfully.
+2022-07-02 17:57:20,889 [INFO] __main__: Training finished successfully.
+```
