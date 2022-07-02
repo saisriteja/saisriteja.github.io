@@ -1,5 +1,5 @@
 ---
-title: "Computer Vision - Part I"
+title: "Nvidia Tao Tutorial"
 date: 2019-07-02T15:34:30-04:00
 categories:
   - blog
@@ -11,20 +11,157 @@ tags:
 # Nvidia Tao Tutorial
 
 
+
 My system specs:
 
 ```python
+(base) saiteja@detecttechvm03:~/DetectTechWork$ nvidia-smi
+Sat Jul  2 17:13:57 2022
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100-PCI...  On   | 00000000:06:00.0 Off |                    0 |
+| N/A   49C    P0    59W / 250W |      0MiB / 40960MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
 
-
-
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
 ```
 
 
 
-
-
-
 ## Specs Config file Training File
+```
+model_config {
+  # Model Architecture can be chosen from:
+  # ['resnet', 'vgg', 'googlenet', 'alexnet']
+  arch: "resnet"
+  # for resnet --> n_layers can be [10, 18, 50]
+  # for vgg --> n_layers can be [16, 19]
+  n_layers: 18
+  use_batch_norm: True
+  use_bias: False
+  all_projections: False
+  use_pooling: True
+  resize_interpolation_method: BICUBIC
+  # if you want to use the pretrained model,
+  # image size should be "3,224,224"
+  # otherwise, it can be "3, X, Y", where X,Y >= 16
+  input_image_size: "3,224,224"
+}
+train_config {
+  train_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/train"
+  val_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/val"
+  # use when model is already trained and pruned
+  # pretrained_model_path: "/home/saiteja/models/weights/resnet_150_pruned.tlt"
+  # Only ['sgd', 'adam'] are supported for optimizer
+  optimizer {
+      sgd {
+      lr: 0.01
+      decay: 0.0
+      momentum: 0.9
+      nesterov: False
+      }
+  }
+  batch_size_per_gpu: 24
+  n_epochs: 10
+  # Number of CPU cores for loading data
+  n_workers: 4
+  # regularizer
+  reg_config {
+      # regularizer type can be "L1", "L2" or "None".
+      # use while training the model
+      #type: "L2"
+      # use while training the pruned model
+      type: "None" 
+      # if the type is not "None",
+      # scope can be either "Conv2D" or "Dense" or both.
+      scope: "Conv2D,Dense"
+      # 0 < weight decay < 1
+      weight_decay: 0.000015
+  }
+  # learning_rate
+  lr_config {
+      cosine {
+      learning_rate: 0.04
+      soft_start: 0.0
+      }
+  }
+  enable_random_crop: True
+  enable_center_crop: True
+  enable_color_augmentation: True
+  mixup_alpha: 0.2
+  label_smoothing: 0.1
+  preprocess_mode: "caffe"
+  image_mean {
+    key: 'b'
+    value: 103.9
+  }
+  image_mean {
+    key: 'g'
+    value: 116.8
+  }
+  image_mean {
+    key: 'r'
+    value: 123.7
+  }
+}
+eval_config {
+  eval_dataset_path: "/home/saiteja/DetectTechWork/New Masks Dataset/test"
+  model_path: "/home/saiteja/DetectTechWork/weights/resnet_010.tlt"
+  top_k: 3
+  batch_size: 256
+  n_workers: 4
+  enable_center_crop: True
+}
+```
+
+
+## Edit the .tao_mounts.json
+
+```python
+{
+    "Mounts": [
+        {
+            "source": "/home",
+            "destination": "/workspace"
+        },
+        {
+            "source": "/home",
+            "destination": "/home"
+        }
+    ],
+    "Envs": [
+        {
+            "variable": "CUDA_DEVICE_ORDER",
+            "value": "PCI_BUS_ID"
+        }
+    ],
+    "DockerOptions": {
+        "shm_size": "16G",
+        "ulimits": {
+            "memlock": -1,
+            "stack": 67108864
+        },
+        "ports": {
+            "8001": 8001
+        }
+    }
+}
+```
+
+
+## Cmd for training the base model
 
 ```python
 tao classification train -e /home/saiteja/DetectTechWork/spec.cfg -r /home/saiteja/DetectTechWork -k 7221
@@ -771,4 +908,26 @@ Classification Report
    macro avg       0.89      0.88      0.88       100
 weighted avg       0.89      0.88      0.88       100
 ```
+
+
+## cmd to Prune the model 
+```python
+ tao classification prune -m /home/saiteja/DetectTechWork/weights/resnet_010.tlt -o ~/DetectTechWork/weights/prunemodel.tlt -k 7226 --log_files ~/DetectTechWork/prune.log
+```
+
+
+
+## Output of Prune Model
+```python
+WARNING:tensorflow:Deprecation warnings have been disabled. Set TF_ENABLE_DEPRECATION_WARNINGS=1 to re-enable them.
+/usr/local/lib/python3.6/dist-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.5) or chardet (3.0.4) doesn't match a supported version!
+  RequestsDependencyWarning)
+Using TensorFlow backend.
+2022-07-02 11:36:35,129 [INFO] modulus.pruning.pruning: Exploring graph for retainable indices
+2022-07-02 11:36:35,530 [INFO] modulus.pruning.pruning: Pruning model and appending pruned nodes to new graph
+2022-07-02 11:36:46,466 [INFO] iva.common.magnet_prune: Pruning ratio (pruned model / original model): 1.0
+```
+
+
+
 
