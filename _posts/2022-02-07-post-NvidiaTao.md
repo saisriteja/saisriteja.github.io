@@ -931,6 +931,8 @@ Using TensorFlow backend.
 
 
 ## spec config 
+
+
 ```python
 model_config {
   # Model Architecture can be chosen from:
@@ -1016,7 +1018,7 @@ eval_config {
 }
 ```
 
-#@ Log Output after training
+## Log Output after training
 ```python
 File "../root/.cache/bazel/_bazel_root/ed34e6d125608f91724fda23656f1726/execroot/ai_infra/bazel-out/k8-fastbuild/bin/magnet/packages/iva/build_wheel.runfiles/ai_infra/iva/makenet/utils/helper.py", line 174:
 <source missing, REPL/exec in use?>
