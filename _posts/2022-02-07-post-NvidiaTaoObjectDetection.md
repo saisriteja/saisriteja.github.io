@@ -1,6 +1,6 @@
 ---
 title: "Nvidia Tao for Object Detection"
-date: 2022-07-02T15:34:30-04:00
+date: 2019-07-02T15:34:30-04:00
 categories:
   - blog
 tags:
