@@ -1,6 +1,6 @@
 ---
 title: "Part 1: Introduction to Nvidia Tao"
-date: 2022-07-02T15:34:30-04:00
+date: 2022-07-02T15:34:30-05:00
 categories:
   - blog
 tags:
