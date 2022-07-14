@@ -119,9 +119,10 @@ Get an NGC account and API key:
 
 Log in to the NGC docker registry (nvcr.io) using the command docker login nvcr.io and enter the following credentials:
 
+```
 - a. Username: "$oauthtoken"
 - b. Password: "YOUR_NGC_API_KEY"
-
+```
 
 
 
