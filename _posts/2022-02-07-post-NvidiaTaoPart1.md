@@ -37,9 +37,9 @@ I am sure you would know training and infering a model, purning was a new word f
 
 
 
-```
+***
 Note :  > Ever stuck on some error, please use nvidia forms rather stackoverflow or github issues. No one is gonna help you in stack so forget it when it come to nvidia tao. You will get reponse immediatley once you post a question in the form. At max they take a day to respond back to my knowledge.          
-```
+***
 
 
 
