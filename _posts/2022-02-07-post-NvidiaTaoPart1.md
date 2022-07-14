@@ -43,5 +43,20 @@ Note : Ever stuck on some error, please use nvidia forms rather stackoverflow or
 
 
 
+## Installation Process
+
+
+It is always prefered to read the [offical document](https://docs.nvidia.com/tao/tao-toolkit/text/tao_toolkit_quick_start_guide.html) and procced for installtion process. I encourge you to do that, the given below are quick reference to crosscheck.
+
+System Specs:
+
+32 GB system RAM
+32 GB of GPU RAM
+8 core CPU
+1 NVIDIA GPU
+100 GB of SSD space
+
+
+
 
 Happy learning.
