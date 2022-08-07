@@ -1,5 +1,5 @@
 ---
-title: "Nvidia Tao for Object Detection"
+title: "Installing Nvidia Tao and DeepStream"
 date: 2022-07-02T15:34:30-04:00
 categories:
   - blog
@@ -61,32 +61,61 @@ Sat Jul  2 17:13:57 2022
 
 
 
+# Installing DeepStream for Python
+
+The following sequence of steps can install the deepstream in docker in a proper format.
+
+```
+docker pull nvcr.io/nvidia/deepstream:6.1-samples
+```
 
 
-# Dataset Preparation
-
-I am using VisDrone dataset.(https://github.com/VisDrone/VisDrone-Dataset)
-The script below downloads necessary files.
-
-
-```python
-import gdown
-url = 'https://drive.google.com/uc?id=1a2oHjcEcwXP8oUF95qiwrqzACb2YlUhn'
-output = 'train.zip'
-gdown.download(url, output, quiet=False)
-
-url = 'https://drive.google.com/uc?id=1bxK5zgLn0_L8x276eKkuYA_FzwCIjb59'
-output = 'val.zip'
-gdown.download(url, output, quiet=False)
-
-url = 'https://drive.google.com/uc?id=1PFdW_VFSCfZ_sTSZAGjQdifF_Xd5mf0V'
-output = 'test.zip'
-gdown.download(url, output, quiet=False)
+```
+apt install python3-gi python3-dev python3-gst-1.0 python-gi-dev git python-dev \
+    python3 python3-pip python3.8-dev cmake g++ build-essential libglib2.0-dev \
+    libglib2.0-dev-bin libgstreamer1.0-dev libtool m4 autoconf automake libgirepository1.0-dev libcairo2-dev
 ```
 
 
 
+```
+cd /sources
+git clone https://github.com/NVIDIA-AI-IOT/deepstream_python_apps
+cd /opt/nvidia/deepstream/deepstream/sources/deepstream_python_apps/
+git submodule update --init
+```
 
 
+```
+apt-get install -y apt-transport-https ca-certificates -y
+update-ca-certificates
+
+```
+
+
+
+```
+cd 3rdparty/gst-python/
+./autogen.sh
+make
+sudo make install
+```
+
+
+```
+cd deepstream_python_apps/bindings
+mkdir build
+cd build
+cmake ..
+make
+```
+
+
+To test run the a file using deepstream.
+
+```
+cd deepstream_python_apps/apps/deepstream-test2/
+python3 deepstream_test_2.py test.h264 1
+```
 
 
