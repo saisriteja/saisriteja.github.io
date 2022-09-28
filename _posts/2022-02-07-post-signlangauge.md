@@ -23,6 +23,30 @@ Challenges we face while generating the sign video:
 
 3. Use the generated skeleton and convert this to a video which is human realistic. Probably using PIX2PIX GANs can help us to achieve this task. The GANs are good at image to image translation. So we can use the generated skeleton points and convert it to a video.
 
-
-
 When someone says about sign langauge its just not about move hands and fingers alone, we need to even observe the facial expression of the signer to understand the meaning of the sign.  
+
+
+# Data
+I am using German Sign Langauge Dataset and Indian Sign langauge Datasets, since they are good number of samples.
+Basically there are 2 kinds of datasets,
+1. Sign langauge videos for the particular word.
+2. Sign langauge videos for the entire sentence.
+
+
+Indian Sign Langauge Datasets:
+
+Prof Mitesh Khapra - [INLCUDE](https://zenodo.org/record/4010759#.YzP6EtJBzW8) Dataset  (words).
+Prof Elakkiya R  - [ISL-CSLTR](https://data.mendeley.com/datasets/kcmpdxky7p/1) Dataset (Sentences).
+
+
+German Sign Langauge Datasets:
+
+meinedgs - [meinedgs](https://www.sign-lang.uni-hamburg.de/meinedgs/overview/start.html) Dataset (Sentences, words, paragraphs).
+RWTH - [RWTH-PHOENIX-Weather 2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/) Dataset (Sentences).
+
+
+I personally think meinedgs dataset is best of all, it is recording between 2 german signers, we have the english text, german text, german gloss, good quality of signers in the video, the videos timestamps(start, end) are also given for each specific gloss. So we can use this dataset to train our model. When it comes to Indian sign langauge, INCLUDE dataset seems to be better since there good amount of samples.
+
+
+
+
