@@ -35,14 +35,14 @@ Basically there are 2 kinds of datasets,
 
 Indian Sign Langauge Datasets:
 
-Prof Mitesh Khapra - [INLCUDE](https://zenodo.org/record/4010759#.YzP6EtJBzW8) Dataset  (words).
-Prof Elakkiya R  - [ISL-CSLTR](https://data.mendeley.com/datasets/kcmpdxky7p/1) Dataset (Sentences).
+1. Prof Mitesh Khapra - [INLCUDE](https://zenodo.org/record/4010759#.YzP6EtJBzW8) Dataset  (words).
+2. Prof Elakkiya R  - [ISL-CSLTR](https://data.mendeley.com/datasets/kcmpdxky7p/1) Dataset (Sentences).
 
 
 German Sign Langauge Datasets:
 
-meinedgs - [meinedgs](https://www.sign-lang.uni-hamburg.de/meinedgs/overview/start.html) Dataset (Sentences, words, paragraphs).
-RWTH - [RWTH-PHOENIX-Weather 2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/) Dataset (Sentences).
+1. meinedgs - [meinedgs](https://www.sign-lang.uni-hamburg.de/meinedgs/overview/start.html) Dataset (Sentences, words, paragraphs).
+2. RWTH - [RWTH-PHOENIX-Weather 2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/) Dataset (Sentences).
 
 
 I personally think meinedgs dataset is best of all, it is recording between 2 german signers, we have the english text, german text, german gloss, good quality of signers in the video, the videos timestamps(start, end) are also given for each specific gloss. So we can use this dataset to train our model. When it comes to Indian sign langauge, INCLUDE dataset seems to be better since there good amount of samples.
