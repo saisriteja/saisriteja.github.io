@@ -117,5 +117,3 @@ To test run the a file using deepstream.
 cd deepstream_python_apps/apps/deepstream-test2/
 python3 deepstream_test_2.py test.h264 1
 ```
-
-
