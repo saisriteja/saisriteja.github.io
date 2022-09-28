@@ -5,6 +5,8 @@ categories:
   - blog
 tags:
   - Computer Vision 
+  - DeepStream
+  - Nvidia Tao
 ---
 
 
@@ -35,7 +37,7 @@ sudo apt-get install \
 My system specs:
 
 ```python
-(base) saiteja@detecttechvm03:~/DetectTechWork$ nvidia-smi
+$user:nvidia-smi
 Sat Jul  2 17:13:57 2022
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
