@@ -48,8 +48,8 @@ German Sign Langauge Datasets:
 I personally think meinedgs dataset is best of all, it is recording between 2 german signers, we have the english text, german text, german gloss, good quality of signers in the video, the videos timestamps(start, end) are also given for each specific gloss. So we can use this dataset to train our model. When it comes to Indian sign langauge, INCLUDE dataset seems to be better since there good amount of samples.
 
 
-![Progressive Transformers](assets/images/signlangauge/ProgressiveTF.png)*ProgressiveTransformers(https://doi.org/10.48550/arXiv.2004.14874)*
-![Signing at scale](/assets/images/signlangauge/Siginigatscale.png)*Signing at Scale(https://doi.org/10.48550/arXiv.2203.15354)*
+![Progressive Transformers](/assets/images/signlangauge/ProgressiveTF.png)*[ProgressiveTransformers](https://doi.org/10.48550/arXiv.2004.14874)*
+![Signing at scale](/assets/images/signlangauge/Siginigatscale.png)*[Signing at Scale](https://doi.org/10.48550/arXiv.2203.15354)*
 
 
 
