@@ -49,9 +49,16 @@ I personally think meinedgs dataset is best of all, it is recording between 2 ge
 
 
 ![Progressive Transformers](/assets/images/signlangauge/ProgressiveTF.png)*[ProgressiveTransformers](https://doi.org/10.48550/arXiv.2004.14874)*
+<p align="center">
+[ProgressiveTransformers](https://doi.org/10.48550/arXiv.2004.14874)
+</p>
+
+
 ![Signing at scale](/assets/images/signlangauge/Siginigatscale.png)*[Signing at Scale](https://doi.org/10.48550/arXiv.2203.15354)*
 
-
+<p align="center">
+[Signing at Scale](https://doi.org/10.48550/arXiv.2203.15354)
+</p>
 
 
 
