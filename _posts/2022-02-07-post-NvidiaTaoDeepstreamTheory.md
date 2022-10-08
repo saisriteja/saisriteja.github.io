@@ -1,5 +1,5 @@
 ---
-title: "Installing Nvidia Tao and DeepStream"
+title: "Installing Nvidia Tao and DeepStream Theory"
 date: 2022-07-02T15:34:30-04:00
 categories:
   - blog
