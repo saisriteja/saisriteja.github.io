@@ -109,7 +109,8 @@ Every plugin have a src(source) and a snk(sink). The function of them are analog
 **Pipeline** is a sequence of bins. **Pipelines** can be used to deal and control things according to the user.
 
 
-
+## Triton Server
+This is better of all for some reason, if the models are not compactable to deepstream.
 
 | ![space-1.jpg](/assets/images/deepstream/ds5.png) | 
 |:--:| 
