@@ -22,11 +22,11 @@ The perk of being in office and working is you can start moving with the real ro
 So after working with robots for 6 months, I started digging into application part. I was given the task to design the motion planning of the robot for spine surgical application. We already have a motion planning code, but we wanted it to be fast and the code to be feasible to adopt for more robots. 
 
 
-| ![space-1.jpg](assets/images/htic_robot/20211027_204352.jpg) | 
+| ![space-1.jpg](/assets/images/htic_robot/20211027_204352.jpg) | 
 |:--:| 
 | *Robots in HTIC(2021).* |
 
-| ![space-1.jpg](assets/images/htic_robot/IMG-20170818-WA0001.jpg) | 
+| ![space-1.jpg](/assets/images/htic_robot/IMG-20170818-WA0001.jpg) | 
 |:--:| 
 | *Me and Shashank in love with robots(2016).* |
 
@@ -36,7 +36,7 @@ So after working with robots for 6 months, I started digging into application pa
 The application is simple, imagine drilling a needle into the wall with bare hand. you see the needle can tumble and going in wrong direction. Here doctors do the same thing, but in a spinal chord. Since spine is connected to brain, it the needle insertion is not accurate, things go bad. Imagine you have a holder like an extra arm to hold the screw driver, all you need is to rotate it. The one which holds the driver is the robot here. This is what robot does, simply comes and holds the screw driver for the doctor.
 
 
-| ![space-1.jpg](assets/images/htic_robot/spirnrobt.jpg) | 
+| ![space-1.jpg](/assets/images/htic_robot/spirnrobt.jpg) | 
 |:--:| 
 | *Robot holding the tool to drill the pedicle screw into the vertebrae.* |
 
@@ -50,7 +50,7 @@ Collision include
 
 We need to track all of them and do motion planning, so we built softwares that can replicate the real time simulation inside RViz and used the collision libraries to check. We have checked the collisions and them made proper collision free trajectory.I have helped my peer Aswath Govid, to write motion planning software. 
 
-| ![space-1.jpg](assets/images/htic_robot/docs.jpg) | 
+| ![space-1.jpg](/assets/images/htic_robot/docs.jpg) | 
 |:--:| 
 | *The surgical site, have look around the room.* |
 
@@ -64,8 +64,7 @@ We have applied for one of the world best robotic competitions, the annual KUKA 
 
 ## Expo
 I have went to an expo, to checkout what other robotic companies are upto.
-| ![space-1.jpg](assets/images/htic_robot/20211212_163224.jpg
-) | 
+| ![space-1.jpg](/assets/images/htic_robot/20211212_163224.jpg) | 
 |:--:| 
 | *Robotics Expo.* |
 
@@ -77,12 +76,12 @@ Being my first job, the people are of various ages, when I joined, I was the you
 
 When it comes to professional things, Shyam is a good mentor, but Minhas was one who taught me all the other stuff. Dear Minhas, as your disciple, I forever owe you. Thank you for all your teachings. 
 
-| ![space-1.jpg](assets/images/htic_robot/IMG_0571-COLLAGE.jpg) | 
+| ![space-1.jpg](/assets/images/htic_robot/IMG_0571-COLLAGE.jpg) | 
 |:--:| 
 | *Anthony, Me, Nivas, Minhas, Aswath(top photo). The only people you need to make life happier.* |
 
 
-| ![space-1.jpg](assets\images\htic_robot\20220204_212123.jpg) | 
+| ![space-1.jpg](/assets\images\htic_robot\20220204_212123.jpg) | 
 |:--:| 
 | *You gotta party when you are in world top 5.* |
 
