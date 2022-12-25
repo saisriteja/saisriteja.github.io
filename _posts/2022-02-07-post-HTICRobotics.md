@@ -47,7 +47,7 @@ roslaunch ur_robot_driver ur5_bringup.launch robot_ip:=127.0.0.1
 for more information regarding the UR5 and simualtions go to [UR_ROS_tutorial](http://wiki.ros.org/universal_robot/Tutorials/Getting%20Started%20with%20a%20Universal%20Robot%20and%20ROS-Industrial), [Universal_robot_github](https://github.com/ros-industrial/universal_robot) 
 
 
-#### demo
+## demo
 
 [![UR5 using GUI](assets/images/htic_robotics/ur5_rviz_gazebo.png)](https://vimeo.com/512432352 "UR5 using GUI - Click to Watch!")
 
