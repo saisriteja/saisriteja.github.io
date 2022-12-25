@@ -14,12 +14,19 @@ tags:
 HTIC is a health care research lab inside IIT Research park. I have joined in the Team SSR(spine surgical robotics) as a final year intern. I have worked for almost a year and half over here as a robotic engineer. The lab is run by the professor Dr. Mohanasankar Sivaprakasam. When I go to the lab, I see a lot of unique minds wanted to do something different. 
 
 
-# Influence on Professional Life
+# Professional Life
 I was working all the time, under the guidance of a MS Scholar named Shyam A. The perk I got working in the team is the flexibility to learn something new in the first couple of months. I always had a soft corner of healthcare applications and products. So I was working on sundays, back in those days. The first couple of months I got to learn about working in ROS and packages along with it(MoveIt, FastIK, RViz). This is like full time things, which is so exiting to see you working robotics in simulation and stuff. 
 
 The perk of being in office and working is you can start moving with the real robot. I have personall worked with 4 different robots, namely, Elfin, UR, KUKA and Staubli. I have worked with both Cobot and Industrial robots. The company has enough fund to bring in and spend for new robots, It doesnot purchase all of them, but the company rents. Yet a few robot, the company owns it.
 
 So after working with robots for 6 months, I started digging into application part. I was given the task to design the motion planning of the robot for spine surgical application. We already have a motion planning code, but we wanted it to be fast and the code to be feasible to adopt for more robots. 
+
+
+| ![space-1.jpg](assets/images/htic_robot/20211027_204352.jpg) | 
+|:--:| 
+| *Robots in HTIC(2021)* |
+
+
 
 ## Building the core product
 The application is simple, imagine drilling a needle into the wall with bare hand. you see the needle can tumble and going in wrong direction. Here doctors do the same thing, but in a spinal chord. Since spine is connected to brain, it the needle insertion is not accurate, things go bad. Imagine you have a holder like an extra arm to hold the screw driver, all you need is to rotate it. The one which holds the driver is the robot here. This is what robot does, simply comes and holds the screw driver for the doctor.
@@ -39,7 +46,7 @@ Even I was working with really good robots and people around, somewhere deep dow
 ## KUKA Competition
 We have applied for one of the world best robotic competitions, the annual KUKA robotics competition. We are one of the top 5 finalists in the end. 
 
-# Influence on Personal Life
+# Personal Life
 
 Along with software engineers, there is a mechanical team and imaging team. My peers in those teams are so good to me and took good care of me when I needed. A special thanks to Nivas and Pradeep. 
 
