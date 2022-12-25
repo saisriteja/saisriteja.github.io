@@ -49,7 +49,7 @@ for more information regarding the UR5 and simualtions go to [UR_ROS_tutorial](h
 
 #### demo
 
-[![UR5 using GUI](images/ur5_rviz_gazebo.png)](https://vimeo.com/512432352 "UR5 using GUI - Click to Watch!")
+[![UR5 using GUI](assets/images/htic_robotics/ur5_rviz_gazebo.png)](https://vimeo.com/512432352 "UR5 using GUI - Click to Watch!")
 
 
 
@@ -67,7 +67,7 @@ Note1: If you want to make you own changes for the moveit_config file from strac
 
 #### demo
 
-[![Staubli using GUI](images/staubli_rviz_gazebo.png)](https://vimeo.com/512432400 "staubli using GUI - Click to Watch!")
+[![Staubli using GUI](assets/images/htic_robotics/staubli_rviz_gazebo.png)](https://vimeo.com/512432400 "staubli using GUI - Click to Watch!")
 
 
 # Simulation of Intel RealSense depth camera D435
@@ -85,7 +85,7 @@ Note2:  The gazebo plugin is readily available with the [IntelRealSense](https:/
 
 #### demo
 
-[![Intel RealSense](images/realsense_rviz_gazebo.png)](https://vimeo.com/512432308 "Intel RealSense D435 - Click to Watch!")
+[![Intel RealSense](assets/images/htic_robotics/realsense_rviz_gazebo.png)](https://vimeo.com/512432308 "Intel RealSense D435 - Click to Watch!")
 
 when a real sense hardware is available:
 
@@ -113,7 +113,7 @@ Things to remember while doing slam:
 Getting a 3D mesh out of cloud points: [colab](https://colab.research.google.com/drive/1fqXiP8KITOCTaoIi8V6HIQ6b13J95pfA?usp=sharing)
 Inside the collab file you have both the code for the python to capture data and store in .npy format and then you have basic visual to make a 3d mesh out of the cloud data you have.
 
-[![Real Sense Slam](images/slam.png)]
+[![Real Sense Slam](assets/images/htic_robotics/slam.png)]
 
 
 
