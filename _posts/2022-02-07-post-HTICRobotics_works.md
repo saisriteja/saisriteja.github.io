@@ -84,8 +84,3 @@ When it comes to professional things, Shyam is a good mentor, but Minhas was the
 | ![space-1.jpg](/assets\images\htic_robot\20220204_212123.jpg) | 
 |:--:| 
 | *You gotta party when you are in the world's top 5.* |
-
-
-
-
-
