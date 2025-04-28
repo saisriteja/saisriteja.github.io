@@ -1,35 +1,36 @@
 theme: default
 header:
-  name: Chad Baldwin
-  suffix: MCSA
+  name: K Sai Sri Teja
+  suffix: MS in EE (CV-AI)
   display_contact_info: true
-  current_title: Senior Database Developer
+  current_title: Deep Learning Engineer - II
   intro: >
-    Motivated and versatile software and database developer, MCSA certified in Database
-    Development. Proficient in schema design, data normalization techniques and query/index tuning.
-    Always looking for new challenges and new technologies to learn. Experienced with the software
-    development life cycle (SDLC) utilizing various project management methodologies including
-    Agile, Scrum and Kanban. Efficient working both independently and in a team environment.
+    Research-oriented and versatile Deep Learning Engineer specializing in Computer Vision and AI. 
+    Proficient in building end-to-end deep learning pipelines, model optimization, real-time deployment, 
+    and image/video generation tasks. Experienced in the software development life cycle (SDLC) with exposure 
+    to Agile methodologies. Passionate about research-driven innovation, working efficiently both independently 
+    and collaboratively in dynamic environments.
+
 contact:
-  #address: 123 Main St, Test, CA 91234
-  #phone: (123) 456-7890
-  email: resume@chadbaldwin.net
+  #address: Chennai, Tamil Nadu, India
+  #phone:
+  email: kuppasaisriteja@gmail.com
 sections:
-  experience:   true
-  education:    true
-  projects:     true
-  skills:       true
-  recognition:  true
+  experience: true
+  education: true
+  projects: true
+  skills: true
+  recognition: true
   associations: false
-  interests:    true
-  links:        true
+  interests: true
+  links: true
   social_links: false
 social:
-  Website:    /
-  GitHub:     https://github.com/chadbaldwin
-  Twitter:    https://twitter.com/chad_baldwin
+  Website: /
+  GitHub: https://github.com/chadbaldwin
+  Twitter: https://twitter.com/chad_baldwin
   #Dribbble:  https://dribbble.com/chadbaldwin
   #FaceBook:  https://facebook.com/iamchadbaldwin
-  LinkedIn:   https://linkedin.com/in/chadbaldwin
+  LinkedIn: https://linkedin.com/in/chadbaldwin
   #Instagram: https://instagram.com/chad_baldwin
   #Medium:    https://medium.com/@chad-baldwin

@@ -8,40 +8,66 @@
 # Template supports both a description AND a skill list, however it may look best if only one or the
 # other is used. Lists are sorted and concatenated without line breaks separated by • (&bull;)
 
-- skill: Database Design, Development and Reporting
-  description: "12+ years of experience in database/schema design, query tuning, index tuning, SQL development, troubleshooting locking and blocking issues, data analysis, custom reporting and data visualization."
-- skill: .NET Development Using C# and PowerShell
-  description: "9+ years experience with PowerShell and 2+ years of experience working with C# and .NET to build back end services integrating with 3rd party APIs, web scraping, ETL processes and task automation."
-- skill: Tools & Technologies
+# - skill: Database Design, Development and Reporting
+#   description: "12+ years of experience in database/schema design, query tuning, index tuning, SQL development, troubleshooting locking and blocking issues, data analysis, custom reporting and data visualization."
+# - skill: .NET Development Using C# and PowerShell
+#   description: "9+ years experience with PowerShell and 2+ years of experience working with C# and .NET to build back end services integrating with 3rd party APIs, web scraping, ETL processes and task automation."
+# - skill: Tools & Technologies
+#   list:
+#     - Azure DevOps
+#     - AWS Services (incl. Console, CloudWatch, EC2, S3, SES, SNS, Secrets Manager)
+#     - Azure Data Studio (ADS)
+#     - Confluence
+#     - Chrome DevTools
+#     - DBADash
+#     - dbatools
+#     - Docker
+#     - Elasticsearch
+#     - Excel
+#     - Fiddler
+#     - Git
+#     - Jira
+#     - Postman
+#     - PowerShell
+#     - RabbitMQ
+#     - Red Gate Toolbelt
+#     - Sisense BI Reporting
+#     - Splunk
+#     - SQL Server Data Tools (SSDT)
+#     - SQL Server Management Studio (SSMS)
+#     - SQL Server Profiler
+#     - SQL Server Reporting Services (SSRS)
+#     - SVN
+#     - Upsource
+#     - Visual Studio
+#     - VS Code
+
+- skill: Deep Learning Frameworks and Libraries
+  description: >
+    Experienced with major deep learning and machine learning frameworks including
+    PyTorch, TensorFlow, Keras, Scikit-learn, and WandB, alongside scientific computing libraries
+    like Scipy, Numpy, OpenCV, and Pandas for building, training, and evaluating models.
+
+- skill: Developer Tools
+  description: >
+    Proficient in using VSCode, Jupyter Notebook, Google Colab, and version control systems
+    like GitHub, GitLab for code development, collaboration, and experimentation tracking.
+
+- skill: Platforms and Technologies
   list:
-    - Azure DevOps
-    - AWS Services (incl. Console, CloudWatch, EC2, S3, SES, SNS, Secrets Manager)
-    - Azure Data Studio (ADS)
-    - Confluence
-    - Chrome DevTools
-    - DBADash
-    - dbatools
+    - Linux (Ubuntu)
+    - AWS Cloud Services
     - Docker
-    - Elasticsearch
-    - Excel
-    - Fiddler
-    - Git
-    - Jira
-    - Postman
-    - PowerShell
-    - RabbitMQ
-    - Red Gate Toolbelt
-    - Sisense BI Reporting
-    - Splunk
-    - SQL Server Data Tools (SSDT)
-    - SQL Server Management Studio (SSMS)
-    - SQL Server Profiler
-    - SQL Server Reporting Services (SSRS)
-    - SVN
-    - Upsource
-    - Visual Studio
-    - VS Code
+    - ROS (Robot Operating System)
+    - Pybullet
+    - NVIDIA DeepStream
+
+- skill: Programming Languages
+  description: >
+    Strong programming expertise in Python, with experience in building production-grade deep learning
+    pipelines, automation scripts, and backend services.
 
 # HCHB to add:
+
 # Azure, Bicep, Azure DevOps, Pipelines (YAML), DacFx
-# Splunk, SentryOne, JAMS, Rancher, DBADash, 
+# Splunk, SentryOne, JAMS, Rancher, DBADash,

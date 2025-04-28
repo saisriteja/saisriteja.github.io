@@ -1,17 +1,39 @@
-- project: chadbaldwin.net
-  role: Writer
-  duration: Dec, 2020 &mdash; Present
+- project: 3D Reconstruction from SPAD Camera Data
+  role: Research Collaborator
+  duration: Jun, 2024 — Present
   url: "/"
   description: >
-    I've always enjoyed teaching, and I love learning new technologies and sharing tips and tricks
-    I've picked up over the years. So back in Dec 2020 I decided to build my own blog.
+    Collaborative project with Prof. Ashwin Sankaranarayanan (CMU) focusing on leveraging radiance fields
+    for high-quality 3D reconstructions using SPAD camera datasets as priors.
 
-- project: Schema Search, utility stored procedure
-  role: Developer
-  duration: 2015 &mdash; Present
-  url: "https://github.com/chadbaldwin/SQL"
+- project: Night Time Video Flare Removal
+  role: Research Assistant
+  duration: May, 2024 — Jul, 2024
+  url: "/"
   description: >
-    "Schema Search" as I've been calling it, is a stored procedure that focuses on searching the
-    contents of system objects in order to help my understanding of the SQL Server system tables.
-    Eventually, it turned into a tool that I use, at minimum, on a daily basis. The project is
-    hosted on GitHub and is licensed for anyone to use or contribute!
+    Synthesized video datasets using traditional and deep learning-based methods.
+    Experimented with multiple video-based architectures to tackle nighttime flare removal challenges.
+
+- project: Virtual Tryons for Indic Clothing
+  role: Research Assistant
+  duration: Apr, 2024 — Jul, 2024
+  url: "/"
+  description: >
+    Automated dataset scraping, refinement, and annotation. 
+    Developed GAN and diffusion-based models for virtual try-on applications specific to Indian clothing.
+
+- project: Speech Disfluency Detection Using Deep Learning
+  role: Research Assistant
+  duration: Sep, 2020 — Dec, 2020
+  url: "/"
+  description: >
+    Created a Heroku-deployed website for audio data collection. 
+    Built a custom RESNET model trained on spectrograms for detecting filler words and repetitions with 75% accuracy.
+
+- project: Sign Language Video Generator using GAN
+  role: Deep Learning Engineer
+  duration: May, 2020 — Aug, 2020
+  url: "/"
+  description: >
+    Developed a GAN-based deep learning model for generating pose estimation-based sign language videos.
+    Project was part of a government-sponsored initiative with ₹4 million (~40 lakhs) in funding.
