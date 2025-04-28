@@ -55,7 +55,7 @@ header_pages:
   - resume.html
   - archive.html
   #  - books.md # Commenting out for now as putting more focus on pluralsight than reading
-  - bookmarks.md
+  - research.md
 
 plugins:
   - jekyll-feed
