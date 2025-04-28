@@ -29,17 +29,17 @@
         - "Worked with KUKA industrial robots and Han’s Elfin collaborative robots, integrating real-time systems for medical applications."
         - "Gained experience with ROS (Robot Operating System) for robotic software development and Intel RealSense cameras for depth sensing and 3D scanning."
 
-- company: "Independent Research Projects"
-  summary: "Research collaborations and academic projects focused on computer vision, robotics, virtual try-ons, and video enhancement technologies."
-  logo: "/img/companylogos/research.png"
-  url: "#"
-  positions:
-    - title: "Research Collaborator / Engineer"
-      startdate: 2024-04-01
-      summary: "Engaged in multiple research collaborations with leading professors on projects spanning 3D reconstruction, video enhancement, and virtual try-on for Indian clothing."
-      projects:
-        - "3D Reconstruction from SPAD Camera Data (with Prof. Ashwin Sankaranarayanan, CMU): Leveraging radiance fields for high-quality 3D reconstructions using SPAD datasets."
-        - "Night Time Video Flare Removal (with Prof. Kaushik Mitra): Developed synthetic datasets and experimented with deep learning architectures for flare removal."
-        - "Virtual Tryons for Indic Clothing (with Prof. Kaushik Mitra): Scraped and annotated datasets; developed GAN and diffusion models tailored for Indian apparel."
-        - "Speech Disfluency Detection Using Deep Learning (with Prof. A Revathi): Built a web platform for audio data collection; designed and trained a custom ResNet model using spectrograms."
-        - "Sign Language Video Generator Using GAN (with Prof. R Elakkiya): Developed GAN-based models to generate pose estimation videos for Indian Sign Language translation."
+# - company: "Independent Research Projects"
+#   summary: "Research collaborations and academic projects focused on computer vision, robotics, virtual try-ons, and video enhancement technologies."
+#   logo: "/img/companylogos/research.png"
+#   url: "#"
+#   positions:
+#     - title: "Research Collaborator / Engineer"
+#       startdate: 2024-04-01
+#       summary: "Engaged in multiple research collaborations with leading professors on projects spanning 3D reconstruction, video enhancement, and virtual try-on for Indian clothing."
+#       projects:
+#         - "3D Reconstruction from SPAD Camera Data (with Prof. Ashwin Sankaranarayanan, CMU): Leveraging radiance fields for high-quality 3D reconstructions using SPAD datasets."
+#         - "Night Time Video Flare Removal (with Prof. Kaushik Mitra): Developed synthetic datasets and experimented with deep learning architectures for flare removal."
+#         - "Virtual Tryons for Indic Clothing (with Prof. Kaushik Mitra): Scraped and annotated datasets; developed GAN and diffusion models tailored for Indian apparel."
+#         - "Speech Disfluency Detection Using Deep Learning (with Prof. A Revathi): Built a web platform for audio data collection; designed and trained a custom ResNet model using spectrograms."
+#         - "Sign Language Video Generator Using GAN (with Prof. R Elakkiya): Developed GAN-based models to generate pose estimation videos for Indian Sign Language translation."
