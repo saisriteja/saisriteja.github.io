@@ -1,8 +1,8 @@
 theme: minima
 
-title: Chad's Blog
-author: Chad Baldwin
-email: blog@chadbaldwin.net
+title: Teja's Blog
+author: K Sai Sri Teja
+email: kuppasaisriteja@gmail.com
 url: https://saisriteja.github.io
 
 timezone: Etc/UTC # GitHub uses UTC. This is to force dev environment to match
@@ -12,9 +12,9 @@ description: >
   My first blog. Probably no one else will ever read it, but oh well.
 
 # Minima variables
-twitter_username: chad_baldwin
-github_username: chadbaldwin
-linkedin_username: chadbaldwin
+twitter_username: saisriteja
+github_username: saisriteja
+linkedin_username: saisriteja
 #dribbble_username: jekyll
 #facebook_username: jekyll
 #flickr_username: jekyll
@@ -29,15 +29,8 @@ show_excerpts: false
 # Used by simple links page
 social-links:
   Resume: /resume
-  LinkedIn: https://linkedin.com/in/chadbaldwin
-  StackOverflow: https://stackoverflow.com/users/3474677
-  HackerRank: https://hackerrank.com/chadwin
-  GitHub: https://github.com/chadbaldwin
-  Microsoft Learn: https://learn.microsoft.com/en-us/users/chadbaldwin/transcript/v0ylxf6nq5l8ny8
-  Twitter: https://twitter.com/chad_baldwin
-  Reddit: https://reddit.com/user/chadbaldwin
-  Credly: https://credly.com/users/chadbaldwin
-  PluralSight: https://app.pluralsight.com/profile/chadbaldwin
+  LinkedIn: https://linkedin.com/in/saisriteja
+  GitHub: https://github.com/saisriteja
   Website: /
 
 # plugin: jekyll-seo-tag
@@ -47,9 +40,8 @@ twitter:
 social:
   name: Chad Baldwin
   links:
-    - https://twitter.com/chad_baldwin
-    - https://linkedin.com/in/chadbaldwin
-    - https://github.com/chadbaldwin
+    - https://linkedin.com/in/saisriteja
+    - https://github.com/saisriteja
 
 # plugin: jekyll-titles-from-headings
 titles_from_headings:
