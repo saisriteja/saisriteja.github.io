@@ -3,7 +3,7 @@ layout: post
 title: Building Better Deep Learning Models
 description:
 date: 2025-01-22 16:40:16
-tags: Deep Learning
+tags: DeepLearning
 image: img/postbanners/2024-08-07-convert-datetime2-bigint.png
 ---
 

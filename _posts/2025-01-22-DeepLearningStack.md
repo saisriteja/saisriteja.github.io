@@ -1,20 +1,23 @@
 ---
 layout: post
-title: Deep learning stack
+title: Deep learning Stack
 description:
 date: 2025-01-22 16:40:16
-tags: Deep Learning
+tags: DeepLearning
 image: img/postbanners/2024-08-07-convert-datetime2-bigint.png
 ---
 
 
-# Deep Learning Stack of blogs
 
-I am doing a series of blogs that i learnt thorught my journey. I am stacking up things and experimetns i learnt in my way. I am more of a vision guy than LLM, so the blogs might be biased to vision. 
+# Deep Learning Stack of Blogs
 
+I am documenting a series of blogs based on what I have learned throughout my journey. These blogs capture the experiments, insights, and concepts I explored. Since my primary focus is computer vision rather than large language models (LLMs), the content leans more towards vision-centric topics.
 
-1. auto deep learnig - to automate the deep learning model trianing and learn when they fail
-2. better dl models - now how to recover the models on the failed cases
-3. 3d vision - can we do something in data generation or restoration in 3d directly
-4. 2d vision - can we do something in data generation or restoration in 2d directly
-5. multimodal - can we do something by bringing in more modalities
+| Blog Topic | Link |
+|:-----------|:-----|
+| Auto Deep Learning: Automating training and learning from model failures | [AutoDL](https://saisriteja.github.io/2025/01/22/AutoDL.html) |
+| Building Better Deep Learning Models: Recovering and improving models after failures | [Building Better DL Model](https://saisriteja.github.io/2025/01/22/BuildingBetterDeepLearningModel.html) |
+| 3D Vision: Data generation and restoration in 3D space | [3D Vision](https://saisriteja.github.io/2025/02/22/3dVision.html) |
+| 2D Vision: Data generation and restoration in 2D space | *Coming Soon* |
+| Multimodal Machine Learning: Integrating multiple modalities for richer models | [MultiModal ML](https://saisriteja.github.io/2025/02/22/MultiModalML.html) |
+
