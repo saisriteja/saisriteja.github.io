@@ -56,6 +56,7 @@ header_pages:
   - archive.html
   #  - books.md # Commenting out for now as putting more focus on pluralsight than reading
   - research.md
+  - about_me.md
 
 plugins:
   - jekyll-feed
