@@ -18,7 +18,7 @@ contact:
 sections:
   experience: true
   education: true
-  projects: true
+  projects: false
   skills: true
   recognition: true
   associations: false
@@ -27,10 +27,6 @@ sections:
   social_links: false
 social:
   Website: /
-  GitHub: https://github.com/chadbaldwin
-  Twitter: https://twitter.com/chad_baldwin
-  #Dribbble:  https://dribbble.com/chadbaldwin
-  #FaceBook:  https://facebook.com/iamchadbaldwin
-  LinkedIn: https://linkedin.com/in/chadbaldwin
-  #Instagram: https://instagram.com/chad_baldwin
-  #Medium:    https://medium.com/@chad-baldwin
+  GitHub: https://github.com/saisriteja
+  LinkedIn: https://www.linkedin.com/in/saisriteja/
+  Twitter: https://twitter.com/saisriteja

@@ -1,317 +1,285 @@
 {%- assign resume = site.data.resume -%}
 
-<script>
-  // Hack to get a better name when printing the file to PDF
-  document.title = "{{resume.header.name}}{{if resume.header.suffix}}, {{resume.header.suffix}}{{endif}} - {{resume.header.current_title}} - Resume";
+<div class="tl-page">
 
-  function JobDateDiff (start, end) {
-      var daysDiff = (new Date(end).getTime() -  new Date(start).getTime()) / 86400000 //ms in a day;
-
-      var years = Math.floor(daysDiff / 365.25);
-      var months = Math.ceil(daysDiff % 365.25 / 30.4375);
-      if (months == 12) { months = 0; years++; }
-
-      // Yeah, I know this is hacky, deal with it, I just threw it in real quick because I was tired of seeing "1 yrs 1 mos"
-      var returnText = "";
-      if (years == 1) { returnText += `${years} yr ` }
-      if (years > 1) { returnText += `${years} yrs ` }
-      if (months == 1) { returnText += `${months} mo ` }
-      if (months > 1) { returnText += `${months} mos ` }
-      returnText = returnText.trim();
-
-      document.write(returnText);
-  }
-
-  // Remove the bottom-bar when X is clicked
-  document.addEventListener("click", function(e) {
-    if (e.target.className.indexOf("bottom-bar__close") !== -1) {
-      document.getElementsByClassName("bottom-bar")[0].remove();
-    }
-  });
-</script>
-
-<link href="https://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans:400,300,800,700" rel="stylesheet" type="text/css">
-<link href="/css/resume.css" rel="stylesheet" type="text/css">
-
-{%- if resume.contact.phone -%}<meta itemprop="telephone" content="{{ resume.contact.phone }}"/>{%- endif -%}
-{%- if resume.contact.address -%}<meta itemprop="address" content="{{ resume.contact.address }}"/>{%- endif -%}
-
-<header class="page-header">
-  <!-- Avatar -->
-  <!-- {%- if site.gravatar_hash -%}
-    <img src="https://drive.google.com/uc?id=1H5tGvOF3MJxCeYx5xsyFev5Ecvh0sgZo" alt="my photo" class="avatar no-print" itemprop="image">
-  {%- endif -%} -->
-  <!-- Name and Suffix -->
-  <div class="header-title">
-    <span class="header-name" itemprop="name">{{ resume.header.name }}</span>
-    {%- if resume.header.suffix -%}
-      <span class="header-suffix">, {{ resume.header.suffix }}</span>
-    {%- endif -%}
+  <!-- ══ HERO ══ -->
+  <div class="tl-hero">
+    <div class="tl-hero-text">
+      <h1 class="tl-hero-name">{{ resume.header.name }}</h1>
+      {%- if resume.header.suffix -%}
+      <p class="tl-hero-suffix">{{ resume.header.suffix }}</p>
+      {%- endif -%}
+      <p class="tl-hero-title-line">{{ resume.header.current_title }}</p>
+      <p class="tl-hero-intro">{{ resume.header.intro }}</p>
+      <div class="tl-hero-actions">
+        {%- if resume.contact.email -%}
+        <a href="mailto:{{ resume.contact.email }}" class="tl-contact-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact me
+        </a>
+        {%- endif -%}
+        {%- if resume.social -%}
+        <div class="tl-hero-socials">
+          {%- for item in resume.social -%}
+          <a href="{{ item[1] }}" target="_blank" rel="noopener" class="tl-social-pill">
+            {%- case item[0] -%}
+              {%- when "GitHub" -%}<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02.005 2.05.14 3.01.4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.31 24 12 24 5.37 18.63 0 12 0z"/></svg>
+              {%- when "LinkedIn" -%}<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+              {%- when "Website" -%}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            {%- endcase -%}
+            {{ item[0] }}
+          </a>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="tl-hero-pdf no-print">
+      <a href="/assets/saisriteja_iit_madras.pdf" class="tl-pdf-btn" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+    </div>
   </div>
-  <!-- Contact Info -->
-  {%- if resume.header.display_contact_info -%}
-    <div class="header-contact-info">
-      {%- for item in resume.contact -%}
-        <span class="header-contact-info-item">{{ item[1] }}</span>
-          {%- if forloop.last -%}
-          {%- else -%}
-            <span> &bull; </span>
-          {%- endif -%}
+
+  <!-- ══ SKILLS ══ -->
+  {%- if resume.sections.skills -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Skills</div>
+    <div class="tl-skills-grid">
+      {%- for skill in site.data.skills -%}
+      <div class="tl-skill-card">
+        <h4 class="tl-skill-name">{{ skill.skill }}</h4>
+        {%- if skill.description -%}<p class="tl-skill-desc">{{ skill.description }}</p>{%- endif -%}
+        {%- if skill.list -%}
+        <div class="tl-skill-pills">
+          {%- for item in skill.list -%}
+          <span class="tl-skill-pill">{{ item }}</span>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
       {%- endfor -%}
     </div>
-  {%- endif -%}
-  <!-- Title and social icon links -->
-  <div class="title-bar no-print">
-    <div class="job-title" itemprop="jobTitle">{{ resume.header.current_title }}</div>
-    {%- if resume.social -%}
-      <div class="icon-links">
-        {%- for item in resume.social -%}
-          <a href="{{ item[1] }}" class="icon-link" itemprop="sameAs" target="_blank">
-            {%- case item[0] -%}
-              {%- when "GitHub"    -%}<img src="/img/socialicons/github.svg">
-              {%- when "Twitter"   -%}<img src="/img/socialicons/twitter.svg">
-              {%- when "Medium"    -%}<img src="/img/socialicons/medium.svg">
-              {%- when "Dribbble"  -%}<img src="/img/socialicons/dribbble.svg">
-              {%- when "Facebook"  -%}<img src="/img/socialicons/facebook.svg">
-              {%- when "LinkedIn"  -%}<img src="/img/socialicons/linkedin.svg">
-              {%- when "Instagram" -%}<img src="/img/socialicons/instagram.svg">
-              {%- when "Website"   -%}<img src="/img/socialicons/website.svg">
-            {%- endcase -%}
-          </a>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
   </div>
-  <!-- Summary -->
-  <div class="executive-summary" itemprop="description"><p>{{ resume.header.intro }}</p></div>
-  <!-- Contact me button -->
-  {%- if resume.contact.email -%}
-    <div>
-      <a href="mailto:{{ resume.contact.email }}" class="contact-button no-print" itemprop="email">Contact me</a>
-    </div>
   {%- endif -%}
-</header>
 
-{%- if resume.sections.skills -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Skills</h2></header>
-    <div class="section-content">
-    {%- for skill in site.data.skills -%}
-      <div class="resume-item">
-        <h4 class="resume-item-details">{{ skill.skill }}</h4>
-        <div class="resume-item-copy">
-          {%- if skill.description -%}
-            <div class="skill-description">
-              {{ skill.description }}
+  <!-- ══ EXPERIENCE TIMELINE ══ -->
+  {%- if resume.sections.experience -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Experience</div>
+    <div class="tl-track">
+      {%- for job in site.data.experience -%}
+      {%- assign side = forloop.index0 | modulo: 2 -%}
+      {%- assign first_pos = job.positions | first -%}
+      <div class="tl-item tl-type-work {% if side == 0 %}tl-left{% else %}tl-right{% endif %}"
+           style="--item-delay:{{ forloop.index0 | times: 100 }}ms"
+           onclick="toggleTlItem(this)" role="button" tabindex="0"
+           onkeydown="if(event.key==='Enter'||event.key===' ')toggleTlItem(this)">
+        <!-- left side: card then dot then spacer  |  right side: spacer then dot then card -->
+        {%- assign positions = job.positions | sort_natural: "startdate" | reverse -%}
+        {%- assign first_pos = positions | first -%}
+        {%- assign last_pos  = positions | last -%}
+        {%- assign start_str = last_pos.startdate | date: "%b %Y" -%}
+        {%- assign end_str   = first_pos.enddate | date: "%b %Y" -%}
+        {%- if end_str == "" -%}{%- assign end_str = "Present" -%}{%- endif -%}
+
+        {%- capture exp_card_html -%}
+        <div class="tl-card-head">
+          <div class="tl-card-meta">
+            <div class="tl-card-org">
+              {%- if job.url -%}<a href="{{ job.url }}" target="_blank" rel="noopener" onclick="event.stopPropagation()">{{ job.company }}</a>{%- else -%}{{ job.company }}{%- endif -%}
             </div>
-          {%- endif -%}
-          {%- if skill.list -%}
-            {%- assign skillSorted = skill.list | sort_natural -%}
-            <div class="skill-list">
-              {%- for item in skillSorted -%}
-                <span>{{ item }}</span>{%- if forloop.last -%}{%- else -%}<span> &bull; </span>{%- endif -%}
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
+            <div class="tl-card-title">{{ first_pos.title }}</div>
+            <div class="tl-card-duration">{{ start_str }} — {{ end_str }}</div>
+          </div>
+          <span class="tl-expand-icon" aria-hidden="true">+</span>
         </div>
+        <div class="tl-details">
+          <div class="tl-details-inner">
+            {%- if job.summary -%}<p class="tl-job-summary">{{ job.summary }}</p>{%- endif -%}
+            {%- for position in positions -%}
+            {%- if positions.size > 1 -%}
+            <p class="tl-pos-title">{{ position.title }}
+              <span class="tl-pos-dates">{{ position.startdate | date: "%b %Y" }} — {{ position.enddate | date: "%b %Y" | default: "Present" }}</span>
+            </p>
+            {%- endif -%}
+            {%- if position.summary -%}<p>{{ position.summary }}</p>{%- endif -%}
+            {%- if position.projects -%}
+            <ul class="tl-bullets">
+              {%- for proj in position.projects -%}<li>{{ proj }}</li>{%- endfor -%}
+            </ul>
+            {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endcapture -%}
+
+        {%- if side == 0 -%}
+        <div class="tl-card">{{ exp_card_html }}</div>
+        <div class="tl-dot tl-dot-work">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <div class="tl-spacer"></div>
+        {%- else -%}
+        <div class="tl-spacer"></div>
+        <div class="tl-dot tl-dot-work">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <div class="tl-card">{{ exp_card_html }}</div>
+        {%- endif -%}
       </div>
-    {%- endfor -%}
+      {%- endfor -%}
     </div>
-  </section>
-{%- endif -%}
+  </div>
+  {%- endif -%}
 
-{%- if resume.sections.experience -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Experience</h2></header>
-    <div class="section-content">
-    {%- for job in site.data.experience -%}
-      {%- assign positions = job.positions | sort_natural: "startdate" | reverse -%}
-
-      {%- if positions.size > 1 -%}
-        {%- assign jobfirstpos = positions | last -%}
-        {%- assign joblastpos = positions | first -%}
-
-        {%- assign jobStartDate = jobfirstpos.startdate | date: "%F" -%}
-        {%- assign jobEndDate = joblastpos.enddate | default: 'now' | date: "%F" -%}
-      {%- endif -%}
-
-      <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
-        <img src="{{ job.logo }}" class="company-logo">
-
-        <h3 class="resume-item-title company-name" itemprop="name" >
-          {%- if job.url -%}<a href="{{ job.url }}" itemprop="url" target="_blank">{{ job.company }}</a>{%- else -%}{{ job.company }}{%- endif -%}
-        </h3>
-
-        {%- if positions.size > 1 -%}
-          <div class="company-duration">
-            <span>{{ jobfirstpos.startdate | date: "%b, %Y" }}</span>
-            <span> &ndash; </span>
-            <span>{{ joblastpos.enddate | date: "%b, %Y" | default: "Present" }}</span>
-            <span> &bull; </span>
-            <span><script>JobDateDiff("{{ jobStartDate }}","{{ jobEndDate }}")</script></span>
-          </div>
-        {%- endif -%}
-
-        {%- if job.summary -%}
-          <div class="job-summary">
-            {{ job.summary }}
-          </div>
-        {%- endif -%}
-
-        {%- for position in positions -%}
-          {%- assign posStartDate = position.startdate | date: "%F" -%}
-          {%- assign posEndDate = position.enddate | default: 'now' | date: "%F" -%}
-
-          <div class="resume-job-position">
-            <div class="position-title">
-              <h4 class="resume-item-details" itemprop="description">{{position.title }}</h4>
-              <div class="position-duration">
-                <span> &bull; </span>
-                <span>{{ position.startdate | date: "%b, %Y" }}</span>
-                <span> &ndash; </span>
-                <span>{{ position.enddate | date: "%b, %Y" | default: "Present" }}</span>
-                <span> &bull; </span>
-                <span><script>JobDateDiff("{{ posStartDate }}","{{ posEndDate }}")</script></span>
-              </div>
+  <!-- ══ EDUCATION TIMELINE ══ -->
+  {%- if resume.sections.education -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Education</div>
+    <div class="tl-track">
+      {%- for edu in site.data.education -%}
+      {%- assign side = forloop.index0 | modulo: 2 -%}
+      <div class="tl-item tl-type-edu {% if side == 0 %}tl-left{% else %}tl-right{% endif %}"
+           style="--item-delay:{{ forloop.index0 | times: 100 }}ms"
+           onclick="toggleTlItem(this)" role="button" tabindex="0"
+           onkeydown="if(event.key==='Enter'||event.key===' ')toggleTlItem(this)">
+        {%- if side == 0 -%}
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div class="tl-card-meta">
+              <div class="tl-card-org">{{ edu.uni }}</div>
+              <div class="tl-card-title">{{ edu.degree }}</div>
+              <div class="tl-card-duration">{{ edu.year }}</div>
             </div>
-            <div class="resume-item-copy">
-              <div class="position-summary">{{ position.summary }}</div>
-              {%- if position.projects -%}
-                <ul class="resume-item-list">
-                  {%- for project in position.projects -%}<li>{{ project }}</li>{%- endfor -%}
-                </ul>
+            <span class="tl-expand-icon" aria-hidden="true">+</span>
+          </div>
+          <div class="tl-details">
+            <div class="tl-details-inner">
+              <p>{{ edu.summary }}</p>
+              {%- if edu.awards -%}
+              <ul class="tl-bullets">
+                {%- for award in edu.awards -%}<li>{{ award.award }}</li>{%- endfor -%}
+              </ul>
               {%- endif -%}
             </div>
           </div>
-        {%- endfor -%}
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.recognition -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Recognition</h2></header>
-    <div class="section-content">
-    {%- for recognition in site.data.recognitions -%}
-      <div class="resume-item">
-        <h3 class="resume-item-title" itemprop="award">{{ recognition.award }}</h3>
-        <h4 class="resume-item-details">{{ recognition.organization }} &bull; {{ recognition.year }}</h4>
-        <div class="resume-item-copy">{{ recognition.summary }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.education -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Education</h2></header>
-    <div class="section-content">
-    {%- for education in site.data.education -%}
-      <div class="resume-item" itemscope itemprop="alumniOf" itemtype="http://schema.org/CollegeOrUniversity">
-        <h3 class="resume-item-title" itemprop="name">{{ education.uni }}</h3>
-        <h4 class="resume-item-details group" itemprop="description">{{ education.degree }} &bull; {{ education.year }}</h4>
-        <h5 class="resume-item-details award-title" itemprop="description">{{ education.award }}</h5>
-        <div class="resume-item-copy" >
-          {%- if education.awards -%}
-            <ul class="resume-item-list">
-              {%- for award in education.awards -%}<li>{{ award.award }}</li>{%- endfor -%}
-            </ul>
-          {%- endif -%}
+        </div>
+        <div class="tl-dot tl-dot-edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="tl-spacer"></div>
+        {%- else -%}
+        <div class="tl-spacer"></div>
+        <div class="tl-dot tl-dot-edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div class="tl-card-meta">
+              <div class="tl-card-org">{{ edu.uni }}</div>
+              <div class="tl-card-title">{{ edu.degree }}</div>
+              <div class="tl-card-duration">{{ edu.year }}</div>
+            </div>
+            <span class="tl-expand-icon" aria-hidden="true">+</span>
           </div>
-        <div class="resume-item-copy" itemprop="description">{{ education.summary }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.projects -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Personal Projects</h2></header>
-    <div class="section-content">
-    {%- for project in site.data.projects -%}
-      <div class="resume-item" itemscope itemtype="http://schema.org/CreativeWork">
-        <meta itemprop="creator" content="{{ site.author }}" itemtype="http://schema.org/Person" />
-        <h3 class="resume-item-title" itemprop="name">{%- if project.url -%}<a href="{{ project.url }}" itemprop="url">{{ project.project }}</a>{%- else -%}{{ project.project }}{%- endif -%}</h3>
-        <h4 class="resume-item-details" itemprop="description">{{ project.role }}  &bull; {{ project.duration }}</h4>
-        <div class="resume-item-copy">{{ project.description }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.associations -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Associations</h2></header>
-    <div class="section-content">
-    {%- for association in site.data.associations -%}
-      <div class="resume-item" itemscope itemprop="memberOf" itemtype="http://schema.org/Organization">
-        <h3 class="resume-item-title" itemprop="name">{%- if association.url -%}<a href="{{ association.url }}">{{ association.organization }}</a>{%- else -%}{{ association.organization }}{%- endif -%}</h3>
-        <h4 class="resume-item-details" itemprop="description">{{ association.role }} &bull; {{ association.year }}</h4>
-        <div class="resume-item-copy">{{ association.summary }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.interests -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Outside Interests</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        <div class="resume-item-copy">{{ site.data.interests.description }}</div>
-      </div>
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.links -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Additional Links</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        <ul class="resume-item-list">
-          {%- for item in site.data.links -%}<li><strong>{{ item.name }}</strong>: <a href="{{ item.url }}" target="_blank">{{ item.label }}</a></li>{%- endfor -%}
-        </ul>
-      </div>
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.social_links -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Social Links</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        {%- if resume.social -%}
-          <ul class="resume-item-list">
-            {%- for item in resume.social -%}<li><strong>{{ item[0] }}</strong>: <a href="{{ item[1] }}" target="_blank">{{ item[1] }}</a></li>{%- endfor -%}
-          </ul>
+          <div class="tl-details">
+            <div class="tl-details-inner">
+              <p>{{ edu.summary }}</p>
+              {%- if edu.awards -%}
+              <ul class="tl-bullets">
+                {%- for award in edu.awards -%}<li>{{ award.award }}</li>{%- endfor -%}
+              </ul>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
         {%- endif -%}
       </div>
+      {%- endfor -%}
     </div>
-  </section>
-{%- endif -%}
-
-<div class="bottom-bar no-print">
-  <div class="bottom-bar__content">
-    <div class="bottom-bar__text">
-      <a href="/assets/saisriteja_iit_madras.pdf" >
-        PDF version available here
-      </a>
-    </div>
-    <button class="bottom-bar__close" type="button">&times;</button>
   </div>
-</div>
+  {%- endif -%}
 
-{%- comment -%}
-<footer class="page-footer">
-  <p class="footer-line">Made by <a href="http://twitter.com/jglovier">@jglovier</a>. Fork me on <a href="https://github.com/jglovier/resume-template">GitHub</a>.</p>
-  <p class="footer-line">If this is your live resume, you can modify or remove this part. ;-)</p>
-</footer>
-{%- endcomment -%}
+  <!-- ══ RECOGNITION ══ -->
+  {%- if resume.sections.recognition -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Recognition</div>
+    <div class="tl-awards-grid">
+      {%- for rec in site.data.recognitions -%}
+      <div class="tl-award-card">
+        <div class="tl-award-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="tl-award-body">
+          <div class="tl-award-title">{{ rec.award }}</div>
+          <div class="tl-award-org">{{ rec.organization }} &bull; {{ rec.year }}</div>
+          <p>{{ rec.summary }}</p>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  <!-- ══ INTERESTS ══ -->
+  {%- if resume.sections.interests -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Interests</div>
+    <div class="tl-interests-card">
+      <p>{{ site.data.interests.description }}</p>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <!-- ══ LINKS ══ -->
+  {%- if resume.sections.links -%}
+  <div class="tl-section">
+    <div class="tl-section-label">Links</div>
+    <div class="tl-links-row">
+      {%- for item in site.data.links -%}
+      <a href="{{ item.url }}" target="_blank" rel="noopener" class="tl-link-pill">
+        {{ item.name }}: {{ item.label }}
+      </a>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+</div><!-- end .tl-page -->
+
+<script>
+function toggleTlItem(el) {
+  const details = el.querySelector('.tl-details');
+  const icon    = el.querySelector('.tl-expand-icon');
+  if (!details) return;
+
+  const isOpen = el.classList.contains('tl-item--open');
+
+  /* collapse any currently open item */
+  document.querySelectorAll('.tl-item--open').forEach(item => {
+    item.classList.remove('tl-item--open');
+    const ic = item.querySelector('.tl-expand-icon');
+    if (ic) ic.textContent = '+';
+  });
+
+  if (!isOpen) {
+    el.classList.add('tl-item--open');
+    if (icon) icon.textContent = '−';
+  }
+}
+
+/* ── Scroll-entry animations ── */
+const tlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('tl-visible');
+      tlObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.10 });
+
+document.querySelectorAll('.tl-item').forEach(el => tlObserver.observe(el));
+document.querySelectorAll('.tl-award-card').forEach(el => tlObserver.observe(el));
+</script>

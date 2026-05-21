@@ -1,6 +1,25 @@
+- company: "Eros GenAI"
+  summary: "Eros GenAI is building Large Cultural Models — generative AI systems trained on Indian cultural context — spanning text-to-image and text-to-video (world generation) at scale."
+  logo: "/img/companylogos/eros_genai_logo.jpg"
+  url: "#"
+  positions:
+    - title: "Machine Learning Engineer"
+      startdate: 2025-02-01
+      summary: "Core contributor to Large Cultural Models (LCMs) — India-centric generative AI systems for image and video/world generation. Responsibilities spanned dataset engineering, model pre-training and fine-tuning, and exploratory architectural research."
+      projects:
+        - "Image Dataset Pipeline: Web-scraped Indic visual content using Playwright/Selenium from stock imagery; processed metadata and imagery for 12,000+ movies to build large-scale culturally grounded datasets."
+        - "Automated image dataset curation with a neural network–based image quality checker, actor/object auto-tagging pipeline, and deduplication using NVIDIA NeMo and Ray."
+        - "Evaluated VLMs (Qwen 2.5-VL, Gemma) for captioning quality; designed in-house indicness scoring metrics to measure cultural relevance of prompts and captions."
+        - "Sole owner of the prompt generation system — prompt engineering to ensure diverse, culturally aware text prompts covering a broad range of users and scenarios."
+        - "Image Model Training: Fine-tuned and pre-trained large-scale diffusion models (PixArt, SANA, Qwen Image, Qwen Image Edit, Flux 2.0, Lumina) using PEFT methods — DreamBooth, IP-Adapter, and LoRA."
+        - "Explored DiT architectural modifications (MaskDiT and variants) and alternative text encoders to improve Indic language and cultural alignment."
+        - "Project RefCompose: Developed a multi-reference image generation system that conditions on multiple input images to compose coherent output generations."
+        - "World Generation (Video) Dataset Pipeline: Built camera pose estimation pipelines from unstructured videos and implemented person tracking and re-identification (ReID) for video dataset curation."
+        - "Contributed to video model training for world generation, enabling temporally consistent scene synthesis."
+
 - company: "Detect Technologies Pvt Ltd"
   summary: "Leading provider of AI-driven solutions for industrial automation, specializing in surveillance, inspection, and monitoring technologies."
-  logo: "/img/companylogos/detect.png"
+  logo: "/img/companylogos/detect_technologies_logo.jpg"
   url: "https://www.detecttechnologies.com/"
   positions:
     - title: "Deep Learning Engineer - II"
@@ -17,7 +36,7 @@
 
 - company: "Healthcare Technology Innovation Center - IIT Madras"
   summary: "Research and innovation center at IIT Madras focused on advanced healthcare solutions leveraging robotics, AI, and medical technology."
-  logo: "/img/companylogos/htic.png"
+  logo: "/img/companylogos/htic_logo.jpg"
   url: "https://htic.iitm.ac.in/"
   positions:
     - title: "Project Associate"

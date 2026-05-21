@@ -1,39 +1,169 @@
-- project: 3D Reconstruction from SPAD Camera Data
+- id: spad-3d-reconstruction
+  project: 3D Reconstruction from SPAD Camera Data
   role: Research Collaborator
-  duration: Jun, 2024 — Present
-  url: "/"
+  duration: Jun 2024 — Present
+  tech: [PyTorch, NeRF, Radiance Fields, Python, SPAD Sensors, 3D Vision]
+  github: ""
+  live: "https://vinayak-vg.github.io/PhotonSplat/"
+  summary: >
+    Leveraging radiance fields with SPAD photon-counting datasets as priors for
+    high-quality 3D reconstructions in challenging low-light conditions.
   description: >
-    Collaborative project with Prof. Ashwin Sankaranarayanan (CMU) focusing on leveraging radiance fields
-    for high-quality 3D reconstructions using SPAD camera datasets as priors.
+    Collaborative research with Prof. Ashwin Sankaranarayanan (CMU) focusing on integrating
+    single-photon avalanche detector (SPAD) data with neural radiance field pipelines.
+    SPAD cameras capture photon arrival timing histograms that encode rich depth and reflectance
+    information invisible to standard RGB cameras, enabling reconstruction in scenes where traditional
+    methods fail.
+  approach: >
+    Designed a multi-modal NeRF variant that ingests raw SPAD histogram data alongside RGB images.
+    Photon timing distributions are encoded into learned positional embeddings that guide the radiance
+    field to resolve ambiguities in low-light and high-dynamic-range scenes. Custom loss functions
+    align predicted photon arrival statistics with measured SPAD histograms during training.
+  challenges: >
+    The primary challenge was bridging the modality gap between continuous radiance fields and
+    discrete photon count statistics. Noise in SPAD measurements at low photon flux required
+    probabilistic noise models integrated directly into the training objective. Fusing asynchronous
+    SPAD and RGB captures also required careful temporal calibration.
+  features:
+    - SPAD-guided neural radiance field pipeline
+    - Custom photon-statistics loss function
+    - Multi-modal fusion of timing histograms and RGB frames
+    - Works in low-light and high-dynamic-range scenes
+    - Quantitative evaluation on synthetic and real SPAD datasets
 
-- project: Night Time Video Flare Removal
+- id: flare-removal
+  project: Night Time Video Flare Removal
   role: Research Assistant
-  duration: May, 2024 — Jul, 2024
-  url: "/"
+  duration: May 2024 — Jul 2024
+  tech: [PyTorch, Diffusion Models, Video Processing, OpenCV, Python, Dataset Synthesis]
+  github: "https://github.com/saisriteja/DiffusionFlare"
+  live: "https://saisriteja.github.io/Flare4DGS/"
+  summary: >
+    Deep learning pipeline for removing nighttime lens flare from videos using a
+    large-scale synthetically generated dataset and diffusion-based architectures.
   description: >
-    Synthesized video datasets using traditional and deep learning-based methods.
-    Experimented with multiple video-based architectures to tackle nighttime flare removal challenges.
+    Built a complete research pipeline to remove lens flare artifacts from nighttime video footage.
+    The work spans dataset synthesis, architecture design, and evaluation. Synthesized realistic
+    flare patterns by compositing optical PSF simulations onto clean nighttime scenes, then
+    trained and benchmarked multiple deep-learning video restoration architectures.
+  approach: >
+    Flare patterns were synthesized using physically-based optical models (Gaussian + scatter
+    kernels) composited at randomized intensities and positions onto clean nighttime video clips.
+    Evaluated both frame-level architectures (UNet, NAFNet variants) and video-level temporal
+    attention models. Also explored diffusion-based approaches where the clean frame is recovered
+    through iterative denoising conditioned on the flare-corrupted input.
+  challenges: >
+    Creating a synthetic dataset that generalises to real-world optical flare diversity was the
+    hardest part. Real flares depend on lens design, aperture, and light-source geometry in ways
+    difficult to parameterise analytically. Temporal consistency across video frames also required
+    specialised loss terms to prevent flickering artefacts in outputs.
+  features:
+    - Large-scale synthetic nighttime flare video dataset
+    - Physically-based flare simulation pipeline
+    - Benchmarked five deep-learning restoration architectures
+    - Diffusion model conditioned on corrupted frames
+    - Temporal consistency loss for flicker-free video output
+    - Published results at ECCVW 2024
 
-- project: Virtual Tryons for Indic Clothing
+- id: virtual-tryon
+  project: Virtual Try-Ons for Indic Clothing
   role: Research Assistant
-  duration: Apr, 2024 — Jul, 2024
-  url: "/"
+  duration: Apr 2024 — Jul 2024
+  tech: [PyTorch, GANs, Diffusion Models, Python, Web Scraping, Annotation, OpenCV]
+  github: ""
+  live: ""
+  summary: >
+    GAN and diffusion-based virtual try-on system specialised for Indian traditional
+    clothing, built on a custom scraped and annotated dataset.
   description: >
-    Automated dataset scraping, refinement, and annotation. 
-    Developed GAN and diffusion-based models for virtual try-on applications specific to Indian clothing.
+    Developed a virtual try-on pipeline tailored to Indian traditional garments such as
+    sarees, kurtas, and lehengas — apparel types not covered by existing Western-focused
+    try-on datasets or architectures. The project involved building the dataset from scratch
+    and adapting state-of-the-art try-on models to handle complex draping patterns.
+  approach: >
+    Automated large-scale scraping of e-commerce product images paired with model-worn photos.
+    Designed a labelling pipeline to annotate garment boundaries, keypoints, and category tags.
+    Fine-tuned a HR-VITON-style GAN backbone on the Indic dataset, and separately fine-tuned
+    a Stable Diffusion inpainting model to handle texture-transfer for saree draping patterns.
+  challenges: >
+    No prior dataset existed for Indian traditional clothing in a try-on context. The complex
+    geometry of saree draping (nine-yard fabric with pleats and pallu) broke standard body-part
+    parsing assumptions. Western garment models also struggled with the sheer texture density
+    of embroidered fabrics like brocade and zardozi.
+  features:
+    - Custom Indic clothing dataset — scraping, cleaning and annotation pipeline
+    - Garment-boundary keypoint annotation tool
+    - HR-VITON fine-tuned for traditional Indian apparel
+    - Stable Diffusion inpainting variant for saree texture transfer
+    - Benchmark comparison against Western try-on baselines
 
-- project: Speech Disfluency Detection Using Deep Learning
+- id: speech-disfluency
+  project: Speech Disfluency Detection
   role: Research Assistant
-  duration: Sep, 2020 — Dec, 2020
-  url: "/"
+  duration: Sep 2020 — Dec 2020
+  tech: [PyTorch, ResNet, Mel-Spectrograms, Flask, Heroku, Python, Audio Processing]
+  github: ""
+  live: ""
+  summary: >
+    Custom ResNet classifier trained on mel-spectrograms that detects filler words and
+    repetitions in speech with 75 % accuracy, deployed on Heroku.
   description: >
-    Created a Heroku-deployed website for audio data collection. 
-    Built a custom RESNET model trained on spectrograms for detecting filler words and repetitions with 75% accuracy.
+    Built an end-to-end system to automatically identify speech disfluencies such as
+    filler words ("um", "uh", "like") and word repetitions in audio recordings. A
+    crowdsourcing web application was deployed on Heroku to collect labelled audio samples,
+    which were then used to train and evaluate the classifier.
+  approach: >
+    Raw audio was segmented into fixed-length clips and converted to 128-band mel-spectrograms.
+    A modified ResNet-18 was trained to classify each segment into one of four classes:
+    fluent speech, filler word, repetition, or silence. Data augmentation (time-stretch,
+    pitch-shift, additive noise) was applied to compensate for the small dataset size.
+    The final model was served through a Flask API with a lightweight frontend for real-time
+    disfluency highlighting.
+  challenges: >
+    Limited labelled data for Indian-accented English disfluencies required a custom
+    crowdsourcing pipeline rather than relying on existing datasets. Short-duration filler
+    words (< 200 ms) are easily masked by surrounding phonemes in spectrogram representations,
+    requiring careful windowing and overlap strategies.
+  features:
+    - Heroku-deployed web app for crowdsourced audio labelling
+    - 128-band mel-spectrogram preprocessing pipeline
+    - Modified ResNet-18 classifier for four disfluency classes
+    - 75 % accuracy on held-out test set
+    - Real-time inference Flask API with highlighted transcript output
+    - Time-stretch and pitch-shift augmentation pipeline
 
-- project: Sign Language Video Generator using GAN
+- id: sign-language-gan
+  project: Sign Language Video Generator using GAN
   role: Deep Learning Engineer
-  duration: May, 2020 — Aug, 2020
-  url: "/"
+  duration: May 2020 — Aug 2020
+  tech: [PyTorch, GANs, Pose Estimation, OpenCV, Python, Indian Sign Language]
+  github: ""
+  live: ""
+  summary: >
+    Government-funded (₹4 M) conditional GAN that synthesises Indian Sign Language
+    pose-sequence videos from text glosses for accessibility applications.
   description: >
-    Developed a GAN-based deep learning model for generating pose estimation-based sign language videos.
-    Project was part of a government-sponsored initiative with ₹4 million (~40 lakhs) in funding.
+    Designed and trained a GAN-based model to generate temporally coherent skeletal
+    pose-sequence videos for Indian Sign Language (ISL) translation. The project was
+    part of a government-sponsored accessibility initiative with a budget of
+    ₹4 million (~40 lakhs) and aimed to produce a tool that could generate ISL
+    demonstrations for any input text phrase.
+  approach: >
+    Used an OpenPose-style keypoint extractor to create a dataset of (gloss, pose-sequence)
+    pairs from ISL reference videos. A conditional GAN was trained where the generator
+    receives a gloss embedding and outputs a sequence of 2D keypoint frames, while the
+    discriminator assesses temporal realism. A separate pose-renderer converts the skeletal
+    outputs to overlay visualisations suitable for end-user applications.
+  challenges: >
+    Generating temporally coherent sequences without mode collapse was the main challenge.
+    ISL has its own spatial grammar (hand shape, location, movement, and non-manual signals),
+    and the model needed to learn inter-frame dependencies across all these dimensions.
+    Large motion variance between different human signers also required signer-normalisation
+    before training.
+  features:
+    - OpenPose-style ISL keypoint dataset (annotated reference videos)
+    - Text-gloss embedding → pose-sequence conditional GAN
+    - Temporal discriminator for sequence realism
+    - Signer-normalisation preprocessing
+    - Skeletal overlay renderer for accessibility UI
+    - Government-funded project with ₹4 M budget
