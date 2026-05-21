@@ -152,6 +152,9 @@
         <div class="tl-card">
           <div class="tl-card-head">
             <div class="tl-card-meta">
+              {%- if edu.logo -%}
+              <img src="{{ edu.logo }}" alt="{{ edu.uni }} logo" class="tl-company-logo">
+              {%- endif -%}
               <div class="tl-card-org">{{ edu.uni }}</div>
               <div class="tl-card-title">{{ edu.degree }}</div>
               <div class="tl-card-duration">{{ edu.year }}</div>
@@ -181,6 +184,9 @@
         <div class="tl-card">
           <div class="tl-card-head">
             <div class="tl-card-meta">
+              {%- if edu.logo -%}
+              <img src="{{ edu.logo }}" alt="{{ edu.uni }} logo" class="tl-company-logo">
+              {%- endif -%}
               <div class="tl-card-org">{{ edu.uni }}</div>
               <div class="tl-card-title">{{ edu.degree }}</div>
               <div class="tl-card-duration">{{ edu.year }}</div>
