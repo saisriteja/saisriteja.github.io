@@ -1518,11 +1518,8 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  font-weight: 300;
   color: var(--text-muted);
   flex-shrink: 0;
-  line-height: 1;
   transition: background var(--transition), color var(--transition),
               transform var(--transition);
   user-select: none;
@@ -1534,7 +1531,7 @@ hr {
 .tl-item--open .tl-expand-icon {
   background: rgba(63, 114, 175, 0.15);
   color: var(--blue);
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
 /* ── Expandable details (grid trick for smooth animation) ── */

@@ -96,7 +96,7 @@
             <div class="tl-card-title">{{ first_pos.title }}</div>
             <div class="tl-card-duration">{{ start_str }} — {{ end_str }}</div>
           </div>
-          <span class="tl-expand-icon" aria-hidden="true">+</span>
+          <span class="tl-expand-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="tl-details">
           <div class="tl-details-inner">
@@ -159,7 +159,7 @@
               <div class="tl-card-title">{{ edu.degree }}</div>
               <div class="tl-card-duration">{{ edu.year }}</div>
             </div>
-            <span class="tl-expand-icon" aria-hidden="true">+</span>
+            <span class="tl-expand-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
           <div class="tl-details">
             <div class="tl-details-inner">
@@ -191,7 +191,7 @@
               <div class="tl-card-title">{{ edu.degree }}</div>
               <div class="tl-card-duration">{{ edu.year }}</div>
             </div>
-            <span class="tl-expand-icon" aria-hidden="true">+</span>
+            <span class="tl-expand-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
           <div class="tl-details">
             <div class="tl-details-inner">
@@ -269,13 +269,10 @@ function toggleTlItem(el) {
   /* collapse any currently open item */
   document.querySelectorAll('.tl-item--open').forEach(item => {
     item.classList.remove('tl-item--open');
-    const ic = item.querySelector('.tl-expand-icon');
-    if (ic) ic.textContent = '+';
   });
 
   if (!isOpen) {
     el.classList.add('tl-item--open');
-    if (icon) icon.textContent = '−';
   }
 }
 
