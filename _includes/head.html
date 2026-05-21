@@ -25,27 +25,29 @@
   <!-- End Google Analytics -->
   {%- endif %}
 
-  <!-- Begin highlight.js support -->
+  <!-- highlight.js — deferred so it never blocks first paint -->
   <link rel="stylesheet" href="/js/highlightjs/styles/github.css">
-  <link rel="stylesheet" href="/js/highlightjs/styles/ssms.css" />
+  <link rel="stylesheet" href="/js/highlightjs/styles/ssms.css">
 
-  <script type="text/javascript" src="/js/highlightjs/highlight.min.js"></script>
+  <script defer src="/js/highlightjs/highlight.min.js"></script>
+  <script defer src="/js/highlightjs/languages/plaintext.min.js"></script>
+  <script defer src="/js/highlightjs/languages/powershell.min.js"></script>
+  <script defer src="/js/highlightjs/languages/tsql.min.js"></script>
+  <script defer src="/js/highlightjs/languages/dot.min.js"></script>
+  <script defer src="/js/highlightjs/languages/python.min.js"></script>
+  <script defer src="/js/highlightjs/languages/csharp.min.js"></script>
 
-  <script type="text/javascript" src="/js/highlightjs/languages/plaintext.min.js"></script>
-  <script type="text/javascript" src="/js/highlightjs/languages/powershell.min.js"></script>
-  <script type="text/javascript" src="/js/highlightjs/languages/tsql.min.js"></script>
-  <script type="text/javascript" src="/js/highlightjs/languages/dot.min.js"></script>
-  <script type="text/javascript" src="/js/highlightjs/languages/python.min.js"></script>
-  <script type="text/javascript" src="/js/highlightjs/languages/csharp.min.js"></script>
-
-  <script type="text/javascript"> hljs.highlightAll(); </script>
+  <!-- runs after all deferred scripts have finished -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof hljs !== 'undefined') hljs.highlightAll();
+    });
+  </script>
   <!-- end highlight.js support -->
 
-  <!-- DarkReader disabled: custom pastel theme handles all colours -->
-
-  <!-- MathJax support for LaTeX -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% if page.layout == 'post' %}
+  <!-- MathJax — only loaded on blog/personal posts that may contain LaTeX -->
+  <!-- polyfill.io removed: MathJax 3 works on all modern browsers without it -->
   <script>
     window.MathJax = {
       tex: {
@@ -55,4 +57,6 @@
       }
     };
   </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% endif %}
 </head>
