@@ -87,6 +87,9 @@
         {%- capture exp_card_html -%}
         <div class="tl-card-head">
           <div class="tl-card-meta">
+            {%- if job.logo -%}
+            <img src="{{ job.logo }}" alt="{{ job.company }} logo" class="tl-company-logo">
+            {%- endif -%}
             <div class="tl-card-org">
               {%- if job.url -%}<a href="{{ job.url }}" target="_blank" rel="noopener" onclick="event.stopPropagation()">{{ job.company }}</a>{%- else -%}{{ job.company }}{%- endif -%}
             </div>

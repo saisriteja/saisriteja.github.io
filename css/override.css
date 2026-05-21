@@ -1593,6 +1593,22 @@ hr {
   line-height: 1.65;
 }
 
+/* ── Company logo in experience cards ── */
+.tl-company-logo {
+  display: block;
+  width: 120px;
+  height: 48px;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 0.6rem;
+  border-radius: 8px;
+  filter: none;
+}
+.tl-left .tl-company-logo {
+  object-position: right center;
+  margin-left: auto;
+}
+
 /* left-side cards: right-align text; right-side cards: left-align */
 .tl-left .tl-card-head { flex-direction: row-reverse; }
 .tl-left .tl-card-meta { text-align: right; }

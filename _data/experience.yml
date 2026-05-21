@@ -3,19 +3,24 @@
   logo: "/img/companylogos/eros_genai_logo.jpg"
   url: "#"
   positions:
-    - title: "Machine Learning Engineer"
-      startdate: 2025-02-01
-      summary: "Core contributor to Large Cultural Models (LCMs) — India-centric generative AI systems for image and video/world generation. Responsibilities spanned dataset engineering, model pre-training and fine-tuning, and exploratory architectural research."
+    - title: "ML Engineer — Image Generation"
+      startdate: 2025-03-01
+      summary: "Core contributor to the Image Generation pillar of Large Cultural Models (LCMs). Owned the full pipeline from Indic dataset curation and captioning to pre-training, fine-tuning, and architectural research on large-scale diffusion models."
       projects:
-        - "Image Dataset Pipeline: Web-scraped Indic visual content using Playwright/Selenium from stock imagery; processed metadata and imagery for 12,000+ movies to build large-scale culturally grounded datasets."
-        - "Automated image dataset curation with a neural network–based image quality checker, actor/object auto-tagging pipeline, and deduplication using NVIDIA NeMo and Ray."
-        - "Evaluated VLMs (Qwen 2.5-VL, Gemma) for captioning quality; designed in-house indicness scoring metrics to measure cultural relevance of prompts and captions."
-        - "Sole owner of the prompt generation system — prompt engineering to ensure diverse, culturally aware text prompts covering a broad range of users and scenarios."
-        - "Image Model Training: Fine-tuned and pre-trained large-scale diffusion models (PixArt, SANA, Qwen Image, Qwen Image Edit, Flux 2.0, Lumina) using PEFT methods — DreamBooth, IP-Adapter, and LoRA."
+        - "Dataset Pipeline: Web-scraped Indic visual content using Playwright/Selenium from stock imagery; processed metadata and imagery for 12,000+ movies to build culturally grounded datasets."
+        - "Built automated curation pipeline with a neural network–based image quality checker, actor/object auto-tagging, and deduplication using NVIDIA NeMo and Ray."
+        - "Evaluated VLMs (Qwen 2.5-VL, Gemma) for captioning quality; designed in-house indicness scoring metrics to measure cultural relevance of generated prompts and captions."
+        - "Sole owner of the prompt generation system — prompt engineering to ensure diverse, culturally aware coverage across a wide range of users and scenarios."
+        - "Pre-trained and fine-tuned large-scale diffusion models (PixArt, SANA, Qwen Image, Qwen Image Edit, Flux 2.0, Lumina) using PEFT methods: DreamBooth, IP-Adapter, and LoRA."
         - "Explored DiT architectural modifications (MaskDiT and variants) and alternative text encoders to improve Indic language and cultural alignment."
         - "Project RefCompose: Developed a multi-reference image generation system that conditions on multiple input images to compose coherent output generations."
-        - "World Generation (Video) Dataset Pipeline: Built camera pose estimation pipelines from unstructured videos and implemented person tracking and re-identification (ReID) for video dataset curation."
-        - "Contributed to video model training for world generation, enabling temporally consistent scene synthesis."
+    - title: "ML Engineer — World Models"
+      startdate: 2025-02-01
+      summary: "Contributor to the World Generation (video) pillar of Large Cultural Models — building temporally consistent video generation from unstructured real-world footage."
+      projects:
+        - "Built camera pose estimation pipelines from unstructured videos to enable structured 3D-aware training data for world models."
+        - "Implemented person tracking and re-identification (ReID) pipelines for large-scale video dataset curation."
+        - "Contributed to video model training for world generation, targeting temporally consistent and culturally grounded scene synthesis."
 
 - company: "Detect Technologies Pvt Ltd"
   summary: "Leading provider of AI-driven solutions for industrial automation, specializing in surveillance, inspection, and monitoring technologies."
