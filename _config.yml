@@ -57,6 +57,7 @@ header_pages:
   - research.md
   - archive.html
   - about_me.md
+  - neurons.html
 
 plugins:
   - jekyll-feed

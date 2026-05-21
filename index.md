@@ -27,6 +27,7 @@ title: Welcome
         <a href="/resume"    class="intro-link-btn">Resume</a>
         <a href="/archive"   class="intro-link-btn">Blog Posts</a>
         <a href="/about_me"  class="intro-link-btn">About Me</a>
+        <a href="/neurons"   class="intro-link-btn">Neural Map</a>
       </div>
     </div>
 

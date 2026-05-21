@@ -1,0 +1,398 @@
+---
+layout: blank
+title: Neural Map
+---
+
+<style>
+  /* Override all Jekyll/Minima layout containers */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #02030e;
+  }
+  .page-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .wrapper {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  #nc {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: block;
+  }
+
+  /* Tiny escape hatch — barely visible, fades in on hover */
+  #home-hint {
+    position: fixed;
+    bottom: 22px;
+    right: 28px;
+    z-index: 10;
+    opacity: 0.08;
+    transition: opacity 0.4s ease;
+    text-decoration: none;
+    color: #8899cc;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    pointer-events: auto;
+  }
+  #home-hint:hover { opacity: 0.55; }
+</style>
+
+<canvas id="nc"></canvas>
+<a href="/" id="home-hint" aria-label="back to home">&#8592; home</a>
+
+<script>
+(function () {
+  'use strict';
+
+  const canvas = document.getElementById('nc');
+  const ctx    = canvas.getContext('2d');
+
+  /* ─── Domain definitions ─────────────────────────────────────────────── */
+  // Each domain has a colour and a "home" position (0-1 of screen)
+  // 0 Speech  – warm amber/gold       – bottom-left
+  // 1 Vision  – electric cyan/blue    – right-centre
+  // 2 Robotics– neon green            – top-left
+  // 3 Life    – violet/purple         – centre (convergence goal)
+  const DOM = [
+    { r: 255, g: 160, b:  50, cx: 0.14, cy: 0.72 }, // speech
+    { r:  20, g: 210, b: 255, cx: 0.72, cy: 0.36 }, // vision / image-text
+    { r:  60, g: 255, b:  80, cx: 0.18, cy: 0.20 }, // robotics
+    { r: 185, g:  85, b: 255, cx: 0.50, cy: 0.50 }, // artificial life
+  ];
+
+  function dc(d, a)  { const {r,g,b} = DOM[d]; return `rgba(${r},${g},${b},${a})`; }
+  function drgb(d)   { const {r,g,b} = DOM[d]; return {r,g,b}; }
+
+  /* ─── State ──────────────────────────────────────────────────────────── */
+  let W, H;
+  let neurons  = [];
+  let signals  = [];
+  let nextSpont    = 0;
+  let nextCascade  = 0;
+  let lastTs       = 0;
+
+  const N_CLUSTER   = 230;   // domain-cluster neurons
+  const N_LIFE      = 28;    // extra convergence-zone neurons
+  const N_HUB       = 20;    // first N_HUB neurons in array are hubs
+  const MAX_SIGNALS = 320;
+
+  /* ─── Neuron class ───────────────────────────────────────────────────── */
+  function Neuron(x, y, dom, hub) {
+    this.x    = x;
+    this.y    = y;
+    this.d    = dom;
+    this.hub  = hub;
+    this.r    = hub ? 2.8 + Math.random() * 2.8 : 1.0 + Math.random() * 2.4;
+    this.conns    = [];      // neighbour indices
+    this.act      = 0;       // activation 0→1
+    this.lastFired= -99999;
+    this.refract  = 550 + Math.random() * 850;
+    this.decay    = 0.00075 + Math.random() * 0.00055;
+  }
+  Neuron.prototype.canFire = function(t) { return (t - this.lastFired) > this.refract; };
+  Neuron.prototype.fire    = function(t) { this.act = 1.0; this.lastFired = t; };
+  Neuron.prototype.tick    = function(dt){ if (this.act > 0) this.act = Math.max(0, this.act - this.decay * dt); };
+
+  /* ─── Signal class ───────────────────────────────────────────────────── */
+  function Signal(from, to, cascade) {
+    this.from    = from;
+    this.to      = to;
+    this.t       = 0;
+    this.speed   = (0.00065 + Math.random() * 0.00055) * (cascade ? 1.55 : 1.0);
+    this.cascade = cascade;
+    this.done    = false;
+    this.trail   = [];   // {x,y}
+  }
+
+  /* ─── Helpers ────────────────────────────────────────────────────────── */
+  function nearestDom(nx, ny, limit) {
+    let best = 0, bd = Infinity;
+    for (let i = 0; i < limit; i++) {
+      const dx = nx - DOM[i].cx, dy = ny - DOM[i].cy;
+      const d  = dx*dx + dy*dy;
+      if (d < bd) { bd = d; best = i; }
+    }
+    return best;
+  }
+
+  /* ─── Init ───────────────────────────────────────────────────────────── */
+  function init() {
+    neurons = [];
+    signals = [];
+
+    const spread = Math.min(W, H) * 0.23;
+
+    /* Cluster neurons (domains 0-2, occasionally bridge) */
+    for (let i = 0; i < N_CLUSTER; i++) {
+      let x, y, dom;
+      if (Math.random() < 0.70) {
+        dom = i % 3;                                   // round-robin for even initial count
+        const c = DOM[dom];
+        x = c.cx * W + (Math.random() - 0.5) * spread;
+        y = c.cy * H + (Math.random() - 0.5) * spread;
+      } else {
+        x = W * 0.06 + Math.random() * W * 0.88;
+        y = H * 0.06 + Math.random() * H * 0.88;
+        dom = nearestDom(x / W, y / H, 3);            // bridge → nearest
+      }
+      x = Math.max(10, Math.min(W - 10, x));
+      y = Math.max(10, Math.min(H - 10, y));
+      neurons.push(new Neuron(x, y, dom, i < N_HUB));
+    }
+
+    /* Convergence neurons (domain 3 – Artificial Life) */
+    for (let i = 0; i < N_LIFE; i++) {
+      const c = DOM[3];
+      const ls = Math.min(W, H) * 0.15;
+      const x  = Math.max(10, Math.min(W-10, c.cx * W + (Math.random()-0.5) * ls));
+      const y  = Math.max(10, Math.min(H-10, c.cy * H + (Math.random()-0.5) * ls));
+      neurons.push(new Neuron(x, y, 3, i < 4));
+    }
+
+    /* Build connections */
+    const diag = Math.sqrt(W*W + H*H);
+    const base = 0.155 * diag;
+
+    for (let i = 0; i < neurons.length; i++) {
+      for (let j = i + 1; j < neurons.length; j++) {
+        const dx = neurons[i].x - neurons[j].x;
+        const dy = neurons[i].y - neurons[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        const mD = (neurons[i].hub || neurons[j].hub) ? base * 1.65 : base;
+        if (d < mD) {
+          const p = Math.pow(1 - d / mD, 1.8) * 0.52;
+          if (Math.random() < p) {
+            neurons[i].conns.push(j);
+            neurons[j].conns.push(i);
+          }
+        }
+      }
+    }
+
+    /* Guarantee minimum connectivity for hubs */
+    neurons.forEach(function(n, i) {
+      if (!n.hub || n.conns.length >= 6) return;
+      const sorted = neurons
+        .map(function(m, j) { const dx=n.x-m.x,dy=n.y-m.y; return {j, d:dx*dx+dy*dy}; })
+        .filter(function(e) { return e.j !== i && !n.conns.includes(e.j); })
+        .sort(function(a,b){ return a.d - b.d; })
+        .slice(0, 10);
+      sorted.forEach(function(e) {
+        n.conns.push(e.j);
+        neurons[e.j].conns.push(i);
+      });
+    });
+  }
+
+  /* ─── Fire ───────────────────────────────────────────────────────────── */
+  function fire(idx, t, cascade) {
+    const n = neurons[idx];
+    if (!n.canFire(t)) return;
+    n.fire(t);
+    if (signals.length >= MAX_SIGNALS) return;
+    const p = cascade ? 0.72 : 0.30;
+    n.conns.forEach(function(ci) {
+      if (Math.random() < p && signals.length < MAX_SIGNALS) {
+        signals.push(new Signal(idx, ci, cascade));
+      }
+    });
+  }
+
+  /* ─── Resize ─────────────────────────────────────────────────────────── */
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', function() { resize(); init(); });
+  resize();
+  init();
+
+  /* ─── Hub index cache ────────────────────────────────────────────────── */
+  function hubIndices() {
+    const out = [];
+    neurons.forEach(function(n, i) { if (n.hub) out.push(i); });
+    return out;
+  }
+
+  /* ─── Pre-draw ambient domain glows ─────────────────────────────────── */
+  function drawAmbient() {
+    DOM.forEach(function(d) {
+      const x = d.cx * W, y = d.cy * H;
+      const r = Math.min(W, H) * 0.28;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0,   `rgba(${d.r},${d.g},${d.b},0.028)`);
+      g.addColorStop(0.5, `rgba(${d.r},${d.g},${d.b},0.010)`);
+      g.addColorStop(1,   `rgba(${d.r},${d.g},${d.b},0)`);
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+  }
+
+  /* ─── Animation loop ─────────────────────────────────────────────────── */
+  function frame(ts) {
+    const dt = Math.min(ts - lastTs, 50);
+    lastTs = ts;
+
+    /* Afterglow fade (not a full clear → trails persist briefly) */
+    ctx.fillStyle = 'rgba(2,3,14,0.20)';
+    ctx.fillRect(0, 0, W, H);
+
+    /* Subtle domain ambient zones */
+    drawAmbient();
+
+    /* Tick neurons */
+    neurons.forEach(function(n) { n.tick(dt); });
+
+    /* ── Spontaneous firing ── */
+    if (ts > nextSpont) {
+      const idx = Math.floor(Math.random() * neurons.length);
+      fire(idx, ts, false);
+      nextSpont = ts + 120 + Math.random() * 480;
+    }
+
+    /* ── Cascade ── */
+    if (ts > nextCascade) {
+      const hubs = hubIndices();
+      fire(hubs[Math.floor(Math.random() * hubs.length)], ts, true);
+      nextCascade = ts + 5500 + Math.random() * 11000;
+    }
+
+    /* ── Draw resting connections ── */
+    ctx.lineWidth = 0.45;
+    const drawnConns = new Set();
+    for (let i = 0; i < neurons.length; i++) {
+      const n = neurons[i];
+      for (let k = 0; k < n.conns.length; k++) {
+        const j = n.conns[k];
+        if (j <= i) continue;
+        const key = i * 100000 + j;
+        if (drawnConns.has(key)) continue;
+        drawnConns.add(key);
+        const m    = neurons[j];
+        const act  = Math.max(n.act, m.act);
+        const alpha= 0.025 + act * 0.055;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(90,110,175,${alpha})`;
+        ctx.moveTo(n.x, n.y);
+        ctx.lineTo(m.x, m.y);
+        ctx.stroke();
+      }
+    }
+
+    /* ── Process signals ── */
+    const alive = [];
+    for (let si = 0; si < signals.length; si++) {
+      const s  = signals[si];
+      s.t     += s.speed * dt;
+
+      const fn = neurons[s.from];
+      const tn = neurons[s.to];
+      const px = fn.x + (tn.x - fn.x) * s.t;
+      const py = fn.y + (tn.y - fn.y) * s.t;
+      const {r,g,b} = drgb(fn.d);
+
+      /* Trail accumulation */
+      s.trail.push({ x: px, y: py });
+      if (s.trail.length > 16) s.trail.shift();
+
+      /* Lit segment along wire */
+      const tailT = Math.max(0, s.t - 0.22);
+      const tx = fn.x + (tn.x - fn.x) * tailT;
+      const ty = fn.y + (tn.y - fn.y) * tailT;
+      const wireGrad = ctx.createLinearGradient(tx, ty, px, py);
+      wireGrad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+      wireGrad.addColorStop(1, `rgba(${r},${g},${b},0.6)`);
+      ctx.beginPath();
+      ctx.strokeStyle = wireGrad;
+      ctx.lineWidth   = 1.4;
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(px, py);
+      ctx.stroke();
+
+      /* Comet trail */
+      for (let ti = 0; ti < s.trail.length; ti++) {
+        const pt   = s.trail[ti];
+        const frac = (ti + 1) / s.trail.length;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, Math.max(0.3, frac * 2.2), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${frac * 0.80})`;
+        ctx.fill();
+      }
+
+      /* Signal head – bright core + soft glow */
+      const hg = ctx.createRadialGradient(px, py, 0, px, py, 6.5);
+      hg.addColorStop(0,   `rgba(${r},${g},${b},1.0)`);
+      hg.addColorStop(0.35,`rgba(${r},${g},${b},0.7)`);
+      hg.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(px, py, 6.5, 0, Math.PI * 2);
+      ctx.fillStyle = hg;
+      ctx.fill();
+
+      /* Hard core dot */
+      ctx.beginPath();
+      ctx.arc(px, py, 2.0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,0.85)`;
+      ctx.fill();
+
+      if (s.t >= 1) {
+        fire(s.to, ts, s.cascade);
+      } else {
+        alive.push(s);
+      }
+    }
+    signals = alive;
+
+    /* ── Draw neurons ── */
+    for (let i = 0; i < neurons.length; i++) {
+      const n = neurons[i];
+      const {r,g,b} = drgb(n.d);
+      const baseA = 0.22 + n.act * 0.78;
+
+      /* Bloom */
+      if (n.act > 0.04) {
+        const br  = n.r * (3.5 + n.act * 7.0);
+        const bg  = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, br);
+        bg.addColorStop(0,   `rgba(${r},${g},${b},${n.act * 0.55})`);
+        bg.addColorStop(0.45,`rgba(${r},${g},${b},${n.act * 0.18})`);
+        bg.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, br, 0, Math.PI * 2);
+        ctx.fillStyle = bg;
+        ctx.fill();
+      }
+
+      /* Core */
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${baseA})`;
+      ctx.fill();
+
+      /* Hub extra ring when fully active */
+      if (n.hub && n.act > 0.5) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + 2.5, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${r},${g},${b},${(n.act - 0.5) * 0.6})`;
+        ctx.lineWidth   = 1.0;
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
