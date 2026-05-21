@@ -11,10 +11,10 @@
   --silver: #DBE2EF;   /* cards, borders, orbs      */
   --blue:   #3F72AF;   /* buttons, links, accents   */
 
-  /* derived */
-  --text:       #112D4E;   /* deep navy for body text  */
-  --text-soft:  #4a6380;
-  --text-muted: #8fa3bb;
+  /* derived — all tints of the 3 palette colours, no outside hues */
+  --text:       rgb(17,  45,  78);   /* dark navy: darkened #3F72AF  */
+  --text-soft:  rgb(74,  99, 128);   /* mid: between --silver & --blue */
+  --text-muted: rgb(143, 163, 187);  /* light: tint of --silver       */
 
   --glass-bg:        rgba(249, 247, 247, 0.62);
   --glass-bg-hover:  rgba(249, 247, 247, 0.82);
@@ -37,15 +37,48 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* ── Hard-reset Minima's own colour variables so nothing bleeds through ── */
+html, body {
+  background-color: rgb(249, 247, 247) !important;
+  color: rgb(17, 45, 78) !important;
+}
+
+/* Kill any filter/sepia that DarkReader or other scripts might inject */
+html { filter: none !important; }
+
 body {
   font-family: var(--font);
-  background-color: var(--white);
-  color: var(--text);
+  background-color: rgb(249, 247, 247) !important;
+  color: rgb(17, 45, 78) !important;
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Minima uses $text-color and link-base-color – override them all */
+.page-content,
+.post-content,
+.site-header,
+.site-footer,
+.wrapper,
+article,
+section,
+main {
+  background-color: transparent !important;
+  color: rgb(74, 99, 128) !important;
+}
+
+/* Minima's default link colour is a brownish-blue – kill it */
+a                { color: rgb(63, 114, 175) !important; }
+a:visited        { color: rgb(63, 114, 175) !important; }
+a:hover          { color: rgb(44,  85, 144) !important; }
+
+/* Minima sets these and they can bleed warm tones */
+.post-link          { color: rgb(17, 45, 78) !important; }
+.post-link:hover    { color: rgb(63, 114, 175) !important; }
+.post-meta          { color: rgb(143, 163, 187) !important; }
+.site-nav .page-link { color: rgb(74, 99, 128) !important; }
 
 /* ============================================================
    FLUID ORBS  — only silver & blue tones
