@@ -1,0 +1,19 @@
+<header class="glass-site-header no-print">
+  <div class="glass-header-inner">
+    <a class="glass-site-title" href="{{ "/" | relative_url }}">
+      {{ site.title | escape }}
+    </a>
+    <nav class="glass-nav" aria-label="Main navigation">
+      {% for path in site.header_pages %}
+        {% assign my_page = site.pages | where: "path", path | first %}
+        {% if my_page.title %}
+          <a class="glass-nav-link{% if page.url == my_page.url %} active{% endif %}"
+             href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <button class="glass-nav-toggle" aria-label="Toggle navigation" onclick="this.closest('.glass-site-header').classList.toggle('nav-open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
