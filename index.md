@@ -9,7 +9,7 @@ title: Welcome
   <div class="intro-hero">
     <img src="/img/profile_pic.jpg" alt="Profile Picture" class="profile-image">
     <div class="profile-text">
-      <h1 style="font-size:1.7rem;margin-bottom:0.8rem;color:#2D3F50;">K Sai Sri Teja</h1>
+      <h1 style="font-size:1.7rem;margin-bottom:0.8rem;color:#112D4E;">K Sai Sri Teja</h1>
       <p>I'm a Machine Learning Engineer at Immerso.ai, where I work on foundational models for large-scale text-to-image and text-to-video generation, with a focus on cinematic movie creation.</p>
       <p>I completed my Master's at IIT Madras, working under <a href="https://www.ee.iitm.ac.in/kmitra/" target="_blank" rel="noopener">Prof. Kaushik Mitra</a>, where my research spanned 2D and 3D vision, particularly in image generation and restoration.</p>
       <p>I'm not big on socializing, but I do enjoy connecting with like-minded people — especially those into computer vision, computational imaging, math, cats, and music. Bonus points if you communicate via funny Instagram reels.</p>
